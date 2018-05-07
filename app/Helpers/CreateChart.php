@@ -16,7 +16,7 @@ class CreateChart
 
     public function line($data, $chart)
     {
-
+        // ree
         $results = [];
         //dd($data);
         foreach ($data as $metric) {
@@ -58,7 +58,7 @@ class CreateChart
 
     public function bar($data, $chart)
     {
-
+        // re
         $results = [];
         //dd($data);
         foreach ($data as $metric) {
