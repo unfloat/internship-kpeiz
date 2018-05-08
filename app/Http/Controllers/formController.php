@@ -21,19 +21,26 @@ class formController extends Controller
         $channeldata = Auth::user()->channels()->take(10)->get();
         //dd($view);
 
-        return view('dashboard', compact('channeldata'));
+        return view('dashboard', compact($channeldata));
     }
 
-    public function putPeriod(Request $request)
-    {
-        // $day =
-        if (isset($request->day)) {
-            Session::put('period', 'test');
-        }
+    // public function putPeriod(Request $request)
+    // {
+    //     // $day =
+    //     if (isset($request->day)) {
+    //         Session::put('period', 'test');
+    //     }
 
-        Session::save();
-        return view('dashboard');
-    }
+    //     Session::save();
+    //     return view('dashboard');
+    // }
+
+    // public function pickFromSavedChannels(Request $request)
+    // {
+    //     Session::put('channel', $request->pichedSavedChannel);
+    //     Session::save();
+    //     return view('dashboard', compact(app('channel')));
+    // }
 
     public function setAccount(Request $request)
     {

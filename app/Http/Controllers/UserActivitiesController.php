@@ -38,13 +38,14 @@ class UserActivitiesController extends Controller
 
             ])
         )->toArray();
+        //dd($data);
 
         foreach ($data['videos'] as $key => $video_data) {
             $videos_data[] = $video_data;
             //dd($video_data);
             $finals[$video_data['title']] = $this->charts->getChart($video_data['video_metrics'],
                 [
-                    'bar'  => ['viewCount', 'likeCount'],
+                    'bar'  => ['viewCount'],
 
                     'line' => ['likeCount'],
                     'pie'  => ['likeCount', 'dislikeCount', 'commentCount'],
@@ -53,11 +54,14 @@ class UserActivitiesController extends Controller
             // dd($viedo_data['video_metrics']);
         }
 
+        //
+
         // /dd($video_thumbnail);
+        // dd($since, $until, $data['videos']);
 
         //dd($finals);
 
-        return view('metrics.useractivities', compact('finals', 'videos_data'));
+        return view('metrics.useractivities', compact('finals', 'videos_data', 'engagement'));
     }
 
 // public static function getVideoMetrics()
@@ -87,49 +91,44 @@ class UserActivitiesController extends Controller
     }
 }
 
-// public static function getEngagement($metrics)
+// function getEngagement($metrics)
 // {
-//  //dd($metrics);
-//  $interactions = 0;
-//  $subscriberCount = 0;
-//  $videoCount = 0;
+//     //dd($metrics);
+//     $interactions    = 0;
+//     $subscriberCount = 0;
+//     $videoCount      = 0;
 
-//  foreach ($metrics as $element) {
-//    //dd($element['label']);
-//    if($element['label'] == 'subscriberCount')
-//    {
+//     foreach ($metrics as $element) {
+//         //dd($element['label']);
+//         if ('subscriberCount' == $element['label']) {
+//             $subscriberCount += $element['value'];
+//             dd($subscriberCount);
 
-//      $subscriberCount += $element['value'];
-//      dd($subscriberCount);
+//             //$time[] = $element['date'];
+//             // continue;
+//         }
+//         if ('likeCount' == $element['label'] || 'commentCount' == $element['label']) {
+//             $interactions += $element['value'];
+//             $time[]       = $element['date'];
+//             $engagement[] = $interactions / ($subscriberCount * 100);
+//         }
 
-//      //$time[] = $element['date'];
-//      // continue;
-//    }
-//    if ( $element['label'] == 'likeCount' || $element['label'] == 'commentCount')
-//      {
-//        $interactions += $element['value'];
-//        $time[] = $element['date'];
-//        $engagement[] = $interactions / ($subscriberCount * 100);
-//      }
+//         if ('videoCount' == $element['label']) {
+//             $videoCount += $element['value'];
+//             // continue;
+//         }
 
-//    if ($element['label'] == 'videoCount')
-//    {
-//      $videoCount += $element['value'];
-//      // continue;
-//    }
+//         // $sumInteractions += $element['value'];
+//     }
+//     dd($engagement);
+//     // $avgEngagement = $engagement / $videoCount;
+//     //dd($engagement);
 
-//    // $sumInteractions += $element['value'];
+//     $chart = Chart::initChart(str_random(5), 'line', 'Engagement')->setLabels($time)->addDataSets($subscriberCount);
 
-//  }
-//  dd($engagement);
-//  // $avgEngagement = $engagement / $videoCount;
-//  //dd($engagement);
+//     //dd($chart);
 
-//  $chart = Chart::initChart(str_random(5),'line','Engagement')->setLabels($time)->addDataSets($subscriberCount);
-
-//  //dd($chart);
-
-//  return $chart;
+//     return $chart;
 // }
 
 //     public function getEngagement($metrics)

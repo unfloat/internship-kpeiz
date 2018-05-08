@@ -22,21 +22,21 @@
   <link rel="stylesheet" href="{{asset('assets/plugins/switchery/switchery.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/plugins/datatables/css/jquery.datatables.min.css')}}"  type="text/css">
   <link rel="stylesheet" href="{{asset('assets/plugins/datatables/css/jquery.datatables_themeroller.css')}}" type="text/css">
-   <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-datepicker/css/datepicker3.css')}}" type="text/css">
+  <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-datepicker/css/datepicker3.css')}}" type="text/css">
   <!-- Theme Styles -->
   <link href="{{asset('/css/space.min.css')}}" rel="stylesheet">
   <link href="{{asset('/css/custom.css')}}" rel="stylesheet">
   {{-- @endsection --}}
   @yield('css')
 
-   <!-- Styles -->
+  <!-- Styles -->
 
 
 
-        <link href="{{asset('assets/plugins/switchery/switchery.min.css')}}" rel="stylesheet"/>
-        <link href="{{asset('assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet ')}}">
+  <link href="{{asset('assets/plugins/switchery/switchery.min.css')}}" rel="stylesheet"/>
+  <link href="{{asset('assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet ')}}">
 
-        <!-- Theme Styles -->
+  <!-- Theme Styles -->
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -45,7 +45,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
     </head>
-    <body>
+    <body class="page-header-fixed">
 
       <!-- Page Container -->
       <div class="page-container">
@@ -59,6 +59,9 @@
          <!-- Page Inner -->
          <div class="page-inner">
            <div class="page-title">
+            @include('layouts.partials.breadcrumbedheader')
+
+
                 {{-- @if(Session::has('collecting'))
                 <div class="alert alert-success alert-dismissible">
                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -68,16 +71,17 @@
               </div>
               @yield('content')
 
-            <!-- /Page Inner -->
+              <!-- /Page Inner -->
 
 
 
-          <!-- /Page Content -->
+              <!-- /Page Content -->
+            </div>
+            <!-- /Page Container -->
+
+          </div>
         </div>
-        <!-- /Page Container -->
 
-</div>
-</div>
         <!-- Javascripts -->
 
 
@@ -107,4 +111,5 @@
 
         @yield('js')
       </body>
+
       </html>

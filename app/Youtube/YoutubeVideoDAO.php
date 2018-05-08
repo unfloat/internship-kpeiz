@@ -17,7 +17,7 @@ class YoutubeVideoDAO
 
     //$videodata = YoutubeAdapter::getVideosByPlaylistId($playlistid);
 
-    public static function getVideoID($playlistid)
+    public static function getVideoID($playlistid, $channelTitle)
     {
 
         //self::saveVideos(YoutubeAdapter::getVideosByPlaylistId('UUfz-e1mfFE85VWicAfipduw'), $playlistid);
@@ -29,33 +29,35 @@ class YoutubeVideoDAO
             // $test = YoutubeAdapter::getVideobyVideoId($videoid);
             // dd($test);
 
-            self::saveVideos(YoutubeAdapter::getVideobyVideoId($videoid), $playlistid);
+            self::saveVideos(YoutubeAdapter::getVideobyVideoId($videoid), $playlistid, $channelTitle);
         }
     }
 
-    public static function saveVideos($data, $playlistid)
+    public static function saveVideos($data, $playlistid, $channelTitle)
     {
 
         foreach ($data->items as $video) {
             //dd($video);
-            self::saveVideo($video, $playlistid);
+            self::saveVideo($video, $playlistid, $channelTitle);
         }
     }
 
-    public static function saveVideo($data, $playlistid)
+    public static function saveVideo($data, $playlistid, $channelTitle)
     {
 
-        $videoArray = self::convertToVideo($data, $playlistid);
+        $videoArray = self::convertToVideo($data, $playlistid, $channelTitle);
         $videoid    = $videoArray['id'];
 
         Video::firstOrCreate(['id' => $videoid], $videoArray);
 
         //dd($data->id);
 
+        //dd($videoArray);
+
         $videoData = self::convertToVideoData($data, $videoid);
 
         $videoData->each(function ($data) {
-            //dd($playlistArray);
+
             VideoData::firstOrCreate(['label' => $data['label'], 'video_id' => $data['video_id']], $data);
         });
 
@@ -72,13 +74,14 @@ class YoutubeVideoDAO
         });
     }
 
-    public static function convertToVideo($data, $playlistid)
+    public static function convertToVideo($data, $playlistid, $channelTitle)
     {
         //dd($data->id);
 
-        $video['id']          = $data->id;
-        $video['title']       = $data->snippet->title;
-        $video['playlist_id'] = $playlistid;
+        $video['id']            = $data->id;
+        $video['title']         = $data->snippet->title;
+        $video['playlist_id']   = $playlistid;
+        $video['channel_title'] = $channelTitle;
         //$video['type'] = ($type == 'videoid') ? 1 : 0;
         $video['description']  = $data->snippet->description;
         $video['published_at'] = Carbon::parse($data->snippet->publishedAt)->toDateString();

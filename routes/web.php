@@ -11,7 +11,7 @@
 |
  */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@getURL');
 
 Route::prefix('auth')->namespace('Auth')->group(function () {
     Route::get('google', 'LoginController@redirectToProvider')->name('login');
@@ -26,12 +26,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/channelmetrics', 'IndicatersController@getMetrics')->name('channelmetrics');
     Route::get('/useractivities', 'UserActivitiesController@getMetrics')->name('useractivities');
     Route::get('/channelactivities', 'ChannelActivitiesController@getMetrics')->name('channelactivities');
-    Route::get('/testchart', 'IndicatersController@ayfct')->name('testchart');
+
+    // Route::get('/home', 'HomeController@test')->name('home');
 
     // POST METHODS
 
     Route::post('/setaccount', 'formController@setAccount')->name('setAccount');
     Route::post('/channel', 'HomeController@postChannel')->name('channelSave');
-    Route::post('/home', 'formController@updateDate')->name('home');
-    Route::post('/putPeriod', 'formController@putPeriod')->name('putPeriod');
+    Route::post('/datepick', 'formController@updateDate')->name('datePick');
+    Route::post('/savedChannelPick', 'formController@pickFromSavedChannels')->name('savedchannelpick');
+    Route::post('/putPeriod', 'formController@putPeriod')->name('putperiod');
 });

@@ -18,10 +18,10 @@ class CreatePlaylistsTable extends Migration
             $table->string('channel_id');
             $table->string('title');
             $table->text('description');
+            $table->string('channel_title');
             $table->date('published_at');
             $table->timestamps();
 
-            
         });
     }
 

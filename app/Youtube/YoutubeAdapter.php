@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Youtube;
 
 use App\Youtube\Api;

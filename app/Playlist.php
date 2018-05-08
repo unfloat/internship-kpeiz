@@ -9,14 +9,14 @@ class Playlist extends Model
     //
 
     public $incrementing = false;
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id','channel_id', 'title','description','published_at',
+        'id', 'channel_id', 'title', 'description', 'published_at', 'channel_title',
     ];
 
     /**
@@ -29,7 +29,7 @@ class Playlist extends Model
     ];
 
     protected $appends = [
-            'metrics','data'
+        'metrics', 'data',
     ];
 
     public function videos()
@@ -54,21 +54,17 @@ class Playlist extends Model
 
     public function getMetricsAttribute()
     {
-        if(is_null($this->playlistMetric))
-        {
+        if (is_null($this->playlistMetric)) {
             $this->load('playlistMetric');
         }
-       return $this->playlistMetric->pluck('value','label');
+        return $this->playlistMetric->pluck('value', 'label');
     }
 
-     public function getDataAttribute()
+    public function getDataAttribute()
     {
-        if(is_null($this->playlistData))
-        {
+        if (is_null($this->playlistData)) {
             $this->load('playlistData');
         }
-       return $this->playlistData->pluck('value','label');
+        return $this->playlistData->pluck('value', 'label');
     }
-
 }
-

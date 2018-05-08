@@ -18,10 +18,11 @@ class CreateVideosTable extends Migration
             $table->string('playlist_id');
             $table->string('title');
             $table->text('description');
+            $table->string('channel_title');
             $table->date('published_at');
             $table->timestamps();
-    });
-}
+        });
+    }
 
     /**
      * Reverse the migrations.

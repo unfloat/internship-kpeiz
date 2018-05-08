@@ -14,19 +14,19 @@ class YoutubePlaylistDAO
         //
     }
 
-    public static function savePlaylists($data, $channelID)
+    public static function savePlaylists($data, $channelID, $channelTitle)
     {
         foreach ($data->items as $playlist) {
             //dd($playlist);
-            self::savePlaylist($playlist, $channelID);
+            self::savePlaylist($playlist, $channelID, $channelTitle);
         }
     }
 
-    public static function savePlaylist($data, $channelID)
+    public static function savePlaylist($data, $channelID, $channelTitle)
     {
         //dd($data);
 
-        $playlistArray = self::convertToPlaylist($data, $channelID);
+        $playlistArray = self::convertToPlaylist($data, $channelID, $channelTitle);
 
         Playlist::firstOrCreate(['id' => $playlistArray['id']], $playlistArray);
 
@@ -53,18 +53,20 @@ class YoutubePlaylistDAO
                 $metric);
         });
 
-        YoutubeVideoDAO::getVideoID($playlistid);
+        YoutubeVideoDAO::getVideoID($playlistid, $channelTitle);
     }
 
-    public static function convertToPlaylist($data, $channelID)
+    public static function convertToPlaylist($data, $channelID, $channelTitle)
     {
         //dd($data);
 
         $playlist = [];
 
-        $playlist['id']         = $data->id;
-        $playlist['title']      = $data->snippet->title;
-        $playlist['channel_id'] = $channelID;
+        $playlist['id']            = $data->id;
+        $playlist['title']         = $data->snippet->title;
+        $playlist['channel_id']    = $channelID;
+        $playlist['channel_title'] = $channelTitle;
+
         //$playlist['type'] = ($type == 'playlistid') ? 1 : 0;
         $playlist['description']  = $data->snippet->description;
         $playlist['published_at'] = Carbon::parse($data->snippet->publishedAt)->toDateString();

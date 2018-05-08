@@ -48,7 +48,6 @@ class YoutubeChannelDAO
             $channelArray);
 
         $channelData = self::convertToChannelData(head($data->items), $channelArray['id']);
-        //dd($channelData);
 
         $channelData->each(function ($data) {
             ChannelData::firstOrCreate(['label' => $data['label'], 'channel_id' => $data['channel_id']], $data);
@@ -75,7 +74,7 @@ class YoutubeChannelDAO
 
         $playlistdata = YoutubeAdapter::getPlaylistByChannelId($savedId);
 
-        YoutubePlaylistDAO::savePlaylists($playlistdata, $savedId);
+        YoutubePlaylistDAO::savePlaylists($playlistdata, $savedId, $channelArray['title']);
 
         //dd($channelArray['uploads']);
 
@@ -88,9 +87,10 @@ class YoutubeChannelDAO
                 $id   = $uploadedVideo->contentDetails->videoId;
                 $data = YoutubeAdapter::getVideobyVideoId($id);
                 //dd($data);
-                YoutubeVideoDAO::saveVideos($data, $channelArray['uploads']);
+                YoutubeVideoDAO::saveVideos($data, $channelArray['uploads'], $channelArray['title']);
             }
         }
+        //dd($data);
 
         return true;
         // return view('dashboard');

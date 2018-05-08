@@ -9,30 +9,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('login');
-    }
-
-    public static function getURL(Request $request)
+    public function getURL(Request $request)
     {
         $channeldata = Auth::user()->channels()->take(10)->get()->toArray();
-        //dd($channeldata);
+        // dd(app('since'), app('until'));
 
         return view('dashboard', compact('channeldata'));
     }
@@ -57,4 +38,16 @@ class HomeController extends Controller
 
         return redirect('dashboard');
     }
+
+    // public function test()
+    // {
+    //     $alreadySavedChannels = Channel::all('id', 'user_id')->toArray();
+
+    //     foreach ($alreadySavedChannels as $alreadySavedChannel) {
+    //         $channeldata = YoutubeAdapter::getChannelbyChannelId($alreadySavedChannel['id']);
+
+    //         $test = YoutubeChannelDAO::saveChannel($channeldata, $alreadySavedChannel['user_id']);
+    //     }
+    //     //dd($test);
+    // }
 }

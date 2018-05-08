@@ -41,6 +41,7 @@ class FetchChannelCommand extends Command
     public function handle()
     {
         $alreadySavedChannels = Channel::all('id', 'user_id')->toArray();
+        //dd($alreadySavedChannels);
 
         foreach ($alreadySavedChannels as $alreadySavedChannel) {
             $channeldata = YoutubeAdapter::getChannelbyChannelId($alreadySavedChannel['id']);

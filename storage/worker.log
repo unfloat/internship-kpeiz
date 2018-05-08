@@ -1961,3 +1961,99 @@ In SqsConnector.php line 26:
 [2018-05-04 09:48:51] Processed:  App\Jobs\FetchChannel
 [2018-05-05 03:05:23] Processing: App\Jobs\FetchChannel
 [2018-05-05 03:05:45] Processed:  App\Jobs\FetchChannel
+[2018-05-08 10:57:49] Processing: App\Jobs\FetchChannel
+PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /var/www/html/youtubetest/app/Youtube/YoutubeChannelDAO.php on line 3
+
+In YoutubeChannelDAO.php line 3:
+                                                                               
+  Namespace declaration statement has to be the very first statement or after  
+   any declare call in the script                                              
+                                                                               
+
+[2018-05-08 10:59:17] Processing: App\Jobs\FetchChannel
+PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /var/www/html/youtubetest/app/Youtube/YoutubeChannelDAO.php on line 3
+
+In YoutubeChannelDAO.php line 3:
+                                                                               
+  Namespace declaration statement has to be the very first statement or after  
+   any declare call in the script                                              
+                                                                               
+
+[2018-05-08 11:00:48] Processing: App\Jobs\FetchChannel
+PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /var/www/html/youtubetest/app/Youtube/YoutubeChannelDAO.php on line 3
+
+In YoutubeChannelDAO.php line 3:
+                                                                               
+  Namespace declaration statement has to be the very first statement or after  
+   any declare call in the script                                              
+                                                                               
+
+[2018-05-08 11:02:07] Processing: App\Jobs\FetchChannel
+PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /var/www/html/youtubetest/app/Youtube/YoutubeChannelDAO.php on line 3
+
+In YoutubeChannelDAO.php line 3:
+                                                                               
+  Namespace declaration statement has to be the very first statement or after  
+   any declare call in the script                                              
+                                                                               
+
+[2018-05-08 11:02:19] Processing: App\Jobs\FetchChannel
+[2018-05-08 11:02:19] Failed:     App\Jobs\FetchChannel
+[2018-05-08 11:03:37] Processing: App\Jobs\FetchChannel
+PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /var/www/html/youtubetest/app/Youtube/YoutubeChannelDAO.php on line 3
+
+In YoutubeChannelDAO.php line 3:
+                                                                               
+  Namespace declaration statement has to be the very first statement or after  
+   any declare call in the script                                              
+                                                                               
+
+[2018-05-08 11:04:04] Processing: App\Jobs\FetchChannel
+PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /var/www/html/youtubetest/app/Youtube/YoutubeChannelDAO.php on line 3
+
+In YoutubeChannelDAO.php line 3:
+                                                                               
+  Namespace declaration statement has to be the very first statement or after  
+   any declare call in the script                                              
+                                                                               
+
+[2018-05-08 11:05:07] Processing: App\Jobs\FetchChannel
+PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /var/www/html/youtubetest/app/Youtube/YoutubeChannelDAO.php on line 3
+
+In YoutubeChannelDAO.php line 3:
+                                                                               
+  Namespace declaration statement has to be the very first statement or after  
+   any declare call in the script                                              
+                                                                               
+
+[2018-05-08 11:05:35] Processing: App\Jobs\FetchChannel
+PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /var/www/html/youtubetest/app/Youtube/YoutubeChannelDAO.php on line 3
+
+In YoutubeChannelDAO.php line 3:
+                                                                               
+  Namespace declaration statement has to be the very first statement or after  
+   any declare call in the script                                              
+                                                                               
+
+[2018-05-08 11:06:38] Processing: App\Jobs\FetchChannel
+[2018-05-08 11:06:38] Failed:     App\Jobs\FetchChannel
+[2018-05-08 11:07:05] Processing: App\Jobs\FetchChannel
+PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /var/www/html/youtubetest/app/Youtube/YoutubeChannelDAO.php on line 3
+
+In YoutubeChannelDAO.php line 3:
+                                                                               
+  Namespace declaration statement has to be the very first statement or after  
+   any declare call in the script                                              
+                                                                               
+
+[2018-05-08 11:08:35] Processing: App\Jobs\FetchChannel
+[2018-05-08 11:08:35] Failed:     App\Jobs\FetchChannel
+[2018-05-08 15:56:22] Processing: App\Jobs\FetchChannel
+[2018-05-08 15:57:52] Processing: App\Jobs\FetchChannel
+[2018-05-08 15:59:22] Processing: App\Jobs\FetchChannel
+[2018-05-08 15:59:30] Processing: App\Jobs\FetchChannel
+[2018-05-08 16:00:49] Processed:  App\Jobs\FetchChannel
+[2018-05-08 16:01:01] Processing: App\Jobs\FetchChannel
+[2018-05-08 16:02:10] Processed:  App\Jobs\FetchChannel
+[2018-05-08 16:02:23] Processed:  App\Jobs\FetchChannel
+[2018-05-08 16:04:04] Processed:  App\Jobs\FetchChannel

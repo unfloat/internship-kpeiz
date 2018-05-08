@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     public $incrementing = false;
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id','playlist_id', 'title', 'description','published_at'
+        'id', 'playlist_id', 'title', 'description', 'published_at', 'channel_title',
     ];
 
     /**
@@ -27,9 +27,8 @@ class Video extends Model
     ];
 
     protected $appends = [
-            'metrics','data'
+        'metrics', 'data',
     ];
-    
 
     public function playlists()
     {
@@ -48,20 +47,17 @@ class Video extends Model
 
     public function getMetricsAttribute()
     {
-        if(is_null($this->videoMetrics))
-        {
+        if (is_null($this->videoMetrics)) {
             $this->load('videoMetrics');
         }
-       return $this->videoMetrics->pluck('value','label');
+        return $this->videoMetrics->pluck('value', 'label');
     }
 
-     public function getDataAttribute()
+    public function getDataAttribute()
     {
-        if(is_null($this->videoData))
-        {
+        if (is_null($this->videoData)) {
             $this->load('videoData');
         }
-       return $this->videoData->pluck('value','label');
+        return $this->videoData->pluck('value', 'label');
     }
-    
 }
