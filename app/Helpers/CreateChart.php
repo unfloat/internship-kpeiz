@@ -7,10 +7,13 @@ class CreateChart
 
     public function getChart($data, $charts = [])
     {
-        //dd($charts);
+
+        // dd($data);
+
         foreach ($charts as $key => $element) {
             $final[] = $this->{$key}($data, $element);
         }
+
         return $final;
     }
 
@@ -26,12 +29,31 @@ class CreateChart
                 // }
             }
         }
+        $since = app('since');
+        $until = app('until');
+
+        $loop    = true;
+        $newData = [];
+        while ($loop) {
+            $newData[$until->toDateString()] = '0';
+            if ($since->gte($until)) {
+                break;
+            }
+            $until->subDay();
+        }
 
         //dd($results);
         $finalcharts = [];
         foreach ($results as $key => $result) {
-            //dd($key);
-            $finalcharts[] = Chart::initChart(str_random(5), 'line', $key)->setLabels(array_keys($result))->addDataSets(array_values($result));
+            foreach ($newData as $k => $v) {
+                if (isset($result[$k])) {
+                    $newData[$k] = $result[$k];
+                }
+            }
+            $newData = array_reverse($newData);
+
+            //$finalcharts[] = Chart::initChart(str_random(5), 'line', $key)->setLabels(array_keys($result))->addDataSets(array_values($result));
+            $finalcharts[] = Chart::initChart(str_random(5), 'line', $key)->setLabels(array_keys($newData))->addDataSets(array_values($newData));
         }
         //dd($finalcharts);
         return $finalcharts;

@@ -11,29 +11,35 @@
 |
  */
 
-Route::get('/', 'HomeController@getURL');
+Route::get('/', 'HomeController@index');
+Route::get('login', 'LoginController@index');
 
 Route::prefix('auth')->namespace('Auth')->group(function () {
     Route::get('google', 'LoginController@redirectToProvider')->name('login');
     Route::get('google/callback', 'LoginController@handleProviderCallback')->name('register');
-    Route::get('logout', 'LoginController@logout');
+
 });
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
     //GET METHODS
     Route::get('/home', 'HomeController@getURL')->name('home');
-    Route::get('/channelmetrics', 'IndicatersController@getMetrics')->name('channelmetrics');
-    Route::get('/useractivities', 'UserActivitiesController@getMetrics')->name('useractivities');
-    Route::get('/channelactivities', 'ChannelActivitiesController@getMetrics')->name('channelactivities');
+    Route::get('/channelmetrics', 'ChannelController@getMetrics')->name('channelmetrics');
+    Route::get('/videometrics', 'VideoController@getMetrics')->name('videometrics');
+    Route::get('/playlistmetrics', 'PlaylistController@getMetrics')->name('playlistmetrics');
+    Route::get('/useractivities', 'ChannelActivitiesController@getMetrics')->name('useractivities');
 
     // Route::get('/home', 'HomeController@test')->name('home');
 
     // POST METHODS
 
     Route::post('/setaccount', 'formController@setAccount')->name('setAccount');
-    Route::post('/channel', 'HomeController@postChannel')->name('channelSave');
+    Route::post('/setplaylist', 'formController@setPlaylist')->name('setPlaylist');
+
+    Route::post('/channel', 'HomeController@postChannel')->name('channelSave'); //here
     Route::post('/datepick', 'formController@updateDate')->name('datePick');
-    Route::post('/savedChannelPick', 'formController@pickFromSavedChannels')->name('savedchannelpick');
-    Route::post('/putPeriod', 'formController@putPeriod')->name('putperiod');
+    Route::post('/setvideo', 'formController@setVideo')->name('setVideo');
+    // Route::post('/putPeriod', 'formController@putPeriod')->name('putPeriod');
 });

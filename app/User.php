@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','name', 'email', 'token', 'provider_id',
+        'id', 'name', 'email', 'token', 'provider_id',
     ];
 
     /**
@@ -26,7 +26,6 @@ class User extends Authenticatable
     protected $hidden = [
         'remember_token',
     ];
-
 
     public function channels()
     {

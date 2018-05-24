@@ -35,7 +35,6 @@ class Chart
             $this->datasets = $params;
         } else {
             $this->datasets[] = $params;
-            // CHANGE DONE HEEEEEEEEEEEERE []
         }
 
         return $this;

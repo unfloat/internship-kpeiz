@@ -17,7 +17,7 @@ class YoutubePlaylistDAO
     public static function savePlaylists($data, $channelID, $channelTitle)
     {
         foreach ($data->items as $playlist) {
-            //dd($playlist);
+            //dd($data->items);
             self::savePlaylist($playlist, $channelID, $channelTitle);
         }
     }
@@ -41,6 +41,8 @@ class YoutubePlaylistDAO
         });
 
         $playlistMetric = self::convertToPlaylistMetric($data, $playlistid);
+
+        //dd($playlistMetric);
 
         $playlistMetric->each(function ($metric) {
             PlaylistMetric::firstOrCreate(
@@ -79,7 +81,7 @@ class YoutubePlaylistDAO
         //dd($data);
 
         $thumbnail['label'] = 'thumbnail';
-        $thumbnail['value'] = $data->snippet->thumbnails->default->url;
+        $thumbnail['value'] = $data->snippet->thumbnails->high->url;
         $thumbnail['type']  = 'string';
         //$thumbnail['channel_id'] = $channelId;
         $thumbnail['playlist_id'] = $playlistid;

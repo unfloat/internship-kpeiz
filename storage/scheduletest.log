@@ -1,0 +1,6 @@
+
+In YoutubeVideoDAO.php line 39:
+                                        
+  Trying to get property of non-object  
+                                        
+

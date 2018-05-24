@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-
+ @include('layouts.partials.breadcrumbedheader')
 <div class="row">
     <div class="col-md-12">
 

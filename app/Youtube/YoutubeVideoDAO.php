@@ -22,7 +22,7 @@ class YoutubeVideoDAO
 
         //self::saveVideos(YoutubeAdapter::getVideosByPlaylistId('UUfz-e1mfFE85VWicAfipduw'), $playlistid);
         $playlistItemsResponse = YoutubeAdapter::getVideosByPlaylistId($playlistid);
-        //dd($playlistItemsResponse->items);
+
         foreach ($playlistItemsResponse->items as $playlistItem) {
             $videoid = $playlistItem->contentDetails->videoId;
             //dd($videoid);
@@ -36,7 +36,7 @@ class YoutubeVideoDAO
     public static function saveVideos($data, $playlistid, $channelTitle)
     {
 
-        foreach ($data->items as $video) {
+        foreach ($data->items as $key => $video) {
             //dd($video);
             self::saveVideo($video, $playlistid, $channelTitle);
         }

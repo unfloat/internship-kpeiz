@@ -38,7 +38,7 @@ class FetchChannel implements ShouldQueue
     {
 
         ('channel' == $this->data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($this->data['channel']) : $channeldata = YoutubeAdapter::getUserChannel($this->data['channel']);
-
+        //dd($channeldata);
         YoutubeChannelDAO::saveChannel($channeldata, $this->user->id);
 
     }

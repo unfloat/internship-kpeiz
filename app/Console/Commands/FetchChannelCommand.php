@@ -40,13 +40,20 @@ class FetchChannelCommand extends Command
      */
     public function handle()
     {
+
         $alreadySavedChannels = Channel::all('id', 'user_id')->toArray();
-        //dd($alreadySavedChannels);
 
-        foreach ($alreadySavedChannels as $alreadySavedChannel) {
-            $channeldata = YoutubeAdapter::getChannelbyChannelId($alreadySavedChannel['id']);
-
-            YoutubeChannelDAO::saveChannel($channeldata, $alreadySavedChannel['user_id']);
+        foreach ($alreadySavedChannels as $key => $alreadySavedChannel) {
+            $channeldata[] = YoutubeAdapter::getChannelbyChannelId($alreadySavedChannel['id']);
         }
+
+        //dd($channeldata);
+
+        YoutubeChannelDAO::saveChannels($channeldata, $alreadySavedChannel['user_id']);
+
+        // foreach ($channeldata as $data) {
+        //     dd($data);
+        //     YoutubeChannelDAO::saveChannel($data, $alreadySavedChannel['user_id']);
+        // }
     }
 }

@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command(FetchChannelCommand::class)
-            ->dailyAt('11:00', '18:00');
+            ->dailyAt('19:46');
 
         // $schedule->call(function () {
 
@@ -41,16 +41,17 @@ class Kernel extends ConsoleKernel
         //     }
         // })->dailyAt('16:00');
     }
-}
 
-/**
- * Register the commands for the application.
- *
- * @return void
- */
-function commands()
-{
-    $this->load(__DIR__ . '/Commands');
+    /**
+     * Register the commands for the application.
+     *
+     * @return void
+     */
+    public function commands()
+    {
+        $this->load(__DIR__ . '/Commands');
 
-    require base_path('routes/console.php');
+        require base_path('routes/console.php');
+    }
+
 }

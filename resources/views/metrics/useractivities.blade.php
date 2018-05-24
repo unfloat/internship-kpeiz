@@ -1,23 +1,45 @@
 @extends('layouts.main')
 
 @section('css')
-{{-- <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet"> --}}
+
 @endsection
 
 @section('content')
 
-
-
 <div class="row">
+
+
+
+
+@if(isset($finals))
+	@foreach($finals as $key => $final )
+	{{ 'Video : '.$key }}
+	@foreach ($final as $key => $charts)
+	@foreach ($charts as $key => $chart)
+	{{$chart->title}}
+	<div class="card-body">
+		<canvas id="{{ $chart->id }}" width="100%" height="30"></canvas>
+	</div>
+	@endforeach
+	@endforeach
+	@endforeach
+	@endif
+
+
+
 
 
 </div>
 
 
+
 @endsection
 
 
+
+
 @section('js')
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> --}}
 
 @if(isset($finals))
 
@@ -31,9 +53,5 @@
 @endforeach
 @endforeach
 @endif
-
-
-
-
 
 @endsection

@@ -20,6 +20,7 @@ class CreateChannelsTable extends Migration
             $table->text('description');
             $table->date('published_at')->nullable();
             $table->boolean('mine')->default(0);
+            //
             $table->timestamps();
 
         });

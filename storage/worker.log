@@ -2057,3 +2057,306 @@ In YoutubeChannelDAO.php line 3:
 [2018-05-08 16:02:10] Processed:  App\Jobs\FetchChannel
 [2018-05-08 16:02:23] Processed:  App\Jobs\FetchChannel
 [2018-05-08 16:04:04] Processed:  App\Jobs\FetchChannel
+[2018-05-08 17:17:30] Processing: App\Jobs\FetchChannel
+[2018-05-08 17:19:00] Processing: App\Jobs\FetchChannel
+[2018-05-08 17:20:30] Processing: App\Jobs\FetchChannel
+[2018-05-08 17:20:40] Processing: App\Jobs\FetchChannel
+[2018-05-08 17:22:12] Processing: App\Jobs\FetchChannel
+[2018-05-08 17:22:12] Failed:     App\Jobs\FetchChannel
+[2018-05-08 17:24:06] Failed:     App\Jobs\FetchChannel
+[2018-05-08 17:24:24] Failed:     App\Jobs\FetchChannel
+[2018-05-08 17:25:51] Processed:  App\Jobs\FetchChannel
+[2018-05-08 20:06:06] Processing: App\Jobs\FetchChannel
+[2018-05-08 20:07:27] Processing: App\Jobs\FetchChannel
+[2018-05-08 20:07:29] Processed:  App\Jobs\FetchChannel
+[2018-05-08 20:07:36] Processing: App\Jobs\FetchChannel
+[2018-05-08 20:09:06] Processing: App\Jobs\FetchChannel
+[2018-05-08 20:09:44] Processing: App\Jobs\FetchChannel
+[2018-05-08 20:11:14] Processing: App\Jobs\FetchChannel
+[2018-05-08 20:11:14] Failed:     App\Jobs\FetchChannel
+[2018-05-08 20:14:15] Processed:  App\Jobs\FetchChannel
+[2018-05-08 20:14:22] Processed:  App\Jobs\FetchChannel
+[2018-05-08 20:15:10] Processed:  App\Jobs\FetchChannel
+[2018-05-09 13:37:10] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:37:26] Processed:  App\Jobs\FetchChannel
+[2018-05-09 13:38:11] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:38:35] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:38:38] Processed:  App\Jobs\FetchChannel
+[2018-05-09 13:38:46] Processed:  App\Jobs\FetchChannel
+[2018-05-09 13:43:32] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:43:46] Processed:  App\Jobs\FetchChannel
+[2018-05-09 13:46:30] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:47:26] Processed:  App\Jobs\FetchChannel
+[2018-05-09 13:48:27] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:49:57] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:50:21] Processed:  App\Jobs\FetchChannel
+[2018-05-09 13:50:24] Processed:  App\Jobs\FetchChannel
+[2018-05-09 13:56:53] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:57:11] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:58:23] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:58:42] Processing: App\Jobs\FetchChannel
+[2018-05-09 13:59:10] Processed:  App\Jobs\FetchChannel
+[2018-05-09 13:59:17] Processing: App\Jobs\FetchChannel
+[2018-05-09 14:00:49] Processing: App\Jobs\FetchChannel
+[2018-05-09 14:00:49] Failed:     App\Jobs\FetchChannel
+[2018-05-09 14:00:52] Processed:  App\Jobs\FetchChannel
+[2018-05-09 14:01:12] Failed:     App\Jobs\FetchChannel
+[2018-05-09 14:08:56] Processing: App\Jobs\FetchChannel
+[2018-05-09 14:10:26] Processing: App\Jobs\FetchChannel
+[2018-05-09 14:11:56] Processing: App\Jobs\FetchChannel
+[2018-05-09 14:11:56] Failed:     App\Jobs\FetchChannel
+[2018-05-09 14:12:44] Failed:     App\Jobs\FetchChannel
+[2018-05-09 14:21:18] Processing: App\Jobs\FetchChannel
+[2018-05-09 14:22:49] Processing: App\Jobs\FetchChannel
+[2018-05-09 14:22:49] Failed:     App\Jobs\FetchChannel
+[2018-05-09 14:28:11] Failed:     App\Jobs\FetchChannel
+[2018-05-10 15:51:26] Processing: App\Jobs\FetchChannel
+[2018-05-10 15:51:43] Processed:  App\Jobs\FetchChannel
+[2018-05-11 09:58:00] Processing: App\Jobs\FetchChannel
+[2018-05-11 09:58:00] Processing: App\Jobs\FetchChannel
+[2018-05-11 09:58:00] Processing: App\Jobs\FetchChannel
+[2018-05-11 09:58:00] Failed:     App\Jobs\FetchChannel
+[2018-05-15 15:24:00] Processing: App\Jobs\FetchChannel
+[2018-05-15 15:25:31] Processing: App\Jobs\FetchChannel
+[2018-05-15 15:26:51] Processing: App\Jobs\FetchChannel
+[2018-05-15 15:28:22] Processing: App\Jobs\FetchChannel
+[2018-05-15 15:28:50] Processing: App\Jobs\FetchChannel
+[2018-05-15 15:29:53] Processing: App\Jobs\FetchChannel
+[2018-05-15 15:29:53] Failed:     App\Jobs\FetchChannel
+[2018-05-15 15:30:20] Processing: App\Jobs\FetchChannel
+[2018-05-15 15:30:20] Failed:     App\Jobs\FetchChannel
+[2018-05-15 15:30:40] Processing: App\Jobs\FetchChannel
+[2018-05-15 15:31:47] Failed:     App\Jobs\FetchChannel
+[2018-05-15 15:32:12] Processing: App\Jobs\FetchChannel
+[2018-05-15 15:32:12] Failed:     App\Jobs\FetchChannel
+[2018-05-15 15:32:13] Failed:     App\Jobs\FetchChannel
+[2018-05-15 15:33:31] Failed:     App\Jobs\FetchChannel
+[2018-05-15 16:57:20] Processing: App\Jobs\FetchChannel
+[2018-05-15 16:57:34] Processing: App\Jobs\FetchChannel
+{#645
+  +"kind": "youtube#channel"
+  +"etag": ""DuHzAJ-eQIiCIp7p4ldoVcVAOeY/ZHzkygRUuATHjXcIbpdEq4tNUyY""
+  +"id": "UCldUc3lPRbibHFOomDrypXA"
+  +"snippet": {#643
+    +"title": "A.L.A"
+    +"description": """
+      Official Channel A.L.A\n
+      \n
+      Follow us on :\n
+      \n
+      https://www.Facebook.com/alaofficielle\n
+      https://www.Instagram.com/a.l.a_official\n
+      https://www.Twitter.com/alaofficielle
+      """
+    +"customUrl": "alaofficial"
+    +"publishedAt": "2017-06-22T19:36:34.000Z"
+    +"thumbnails": {#639
+      +"default": {#628
+        +"url": "https://yt3.ggpht.com/a-/AJLlDp0T-bqqbjRsRUozOes_Q0CgU8-VoaZzXHBOhA=s88-mo-c-c0xffffffff-rj-k-no"
+        +"width": 88
+        +"height": 88
+      }
+      +"medium": {#633
+        +"url": "https://yt3.ggpht.com/a-/AJLlDp0T-bqqbjRsRUozOes_Q0CgU8-VoaZzXHBOhA=s240-mo-c-c0xffffffff-rj-k-no"
+        +"width": 240
+        +"height": 240
+      }
+      +"high": {#632
+        +"url": "https://yt3.ggpht.com/a-/AJLlDp0T-bqqbjRsRUozOes_Q0CgU8-VoaZzXHBOhA=s800-mo-c-c0xffffffff-rj-k-no"
+        +"width": 800
+        +"height": 800
+      }
+    }
+    +"localized": {#630
+      +"title": "A.L.A"
+      +"description": """
+        Official Channel A.L.A\n
+        \n
+        Follow us on :\n
+        \n
+        https://www.Facebook.com/alaofficielle\n
+        https://www.Instagram.com/a.l.a_official\n
+        https://www.Twitter.com/alaofficielle
+        """
+    }
+    +"country": "TN"
+  }
+  +"contentDetails": {#637
+    +"relatedPlaylists": {#644
+      +"uploads": "UUldUc3lPRbibHFOomDrypXA"
+      +"watchHistory": "HL"
+      +"watchLater": "WL"
+    }
+  }
+  +"statistics": {#646
+    +"viewCount": "59642633"
+    +"commentCount": "0"
+    +"subscriberCount": "392568"
+    +"hiddenSubscriberCount": false
+    +"videoCount": "11"
+  }
+}
+[2018-05-15 16:58:50] Processing: App\Jobs\FetchChannel
+{#645
+  +"kind": "youtube#channel"
+  +"etag": ""DuHzAJ-eQIiCIp7p4ldoVcVAOeY/AV6aCX-9zroLDW9IfRai99slbeA""
+  +"id": "UC58C_BhzlZIJTeomuVSD2lA"
+  +"snippet": {#643
+    +"title": "Houseum"
+    +"description": """
+      Listening to House music is healthy\n
+      \n
+      For any contact (host on youtube or/and Premiere on Soundcloud): houseum.yt@gmail.com\n
+      Soundcloud: https://soundcloud.com/houseum\n
+      Facebook: https://www.facebook.com/houseum.yt\n
+      Instagram: https://www.instagram.com/houseumrecords\n
+      \n
+      The beautiful cat and his best friend the bird have been made by Yoko Tanji\n
+      \n
+      Peace
+      """
+    +"customUrl": "houseum"
+    +"publishedAt": "2016-05-09T17:50:55.000Z"
+    +"thumbnails": {#639
+      +"default": {#628
+        +"url": "https://yt3.ggpht.com/a-/AJLlDp25AOFH3c_0FYcyPs-obndGWC210--doUV6gw=s88-mo-c-c0xffffffff-rj-k-no"
+        +"width": 88
+        +"height": 88
+      }
+      +"medium": {#633
+        +"url": "https://yt3.ggpht.com/a-/AJLlDp25AOFH3c_0FYcyPs-obndGWC210--doUV6gw=s240-mo-c-c0xffffffff-rj-k-no"
+        +"width": 240
+        +"height": 240
+      }
+      +"high": {#632
+        +"url": "https://yt3.ggpht.com/a-/AJLlDp25AOFH3c_0FYcyPs-obndGWC210--doUV6gw=s800-mo-c-c0xffffffff-rj-k-no"
+        +"width": 800
+        +"height": 800
+      }
+    }
+    +"localized": {#630
+      +"title": "Houseum"
+      +"description": """
+        Listening to House music is healthy\n
+        \n
+        For any contact (host on youtube or/and Premiere on Soundcloud): houseum.yt@gmail.com\n
+        Soundcloud: https://soundcloud.com/houseum\n
+        Facebook: https://www.facebook.com/houseum.yt\n
+        Instagram: https://www.instagram.com/houseumrecords\n
+        \n
+        The beautiful cat and his best friend the bird have been made by Yoko Tanji\n
+        \n
+        Peace
+        """
+    }
+    +"country": "FR"
+  }
+  +"contentDetails": {#637
+    +"relatedPlaylists": {#644
+      +"uploads": "UU58C_BhzlZIJTeomuVSD2lA"
+      +"watchHistory": "HL"
+      +"watchLater": "WL"
+    }
+  }
+  +"statistics": {#646
+    +"viewCount": "31196534"
+    +"commentCount": "0"
+    +"subscriberCount": "106841"
+    +"hiddenSubscriberCount": false
+    +"videoCount": "1001"
+  }
+}
+[2018-05-15 16:59:04] Processing: App\Jobs\FetchChannel
+[2018-05-15 16:59:19] Processed:  App\Jobs\FetchChannel
+[2018-05-15 17:00:20] Processing: App\Jobs\FetchChannel
+{#628
+  +"kind": "youtube#channel"
+  +"etag": ""DuHzAJ-eQIiCIp7p4ldoVcVAOeY/AV6aCX-9zroLDW9IfRai99slbeA""
+  +"id": "UC58C_BhzlZIJTeomuVSD2lA"
+  +"snippet": {#626
+    +"title": "Houseum"
+    +"description": """
+      Listening to House music is healthy\n
+      \n
+      For any contact (host on youtube or/and Premiere on Soundcloud): houseum.yt@gmail.com\n
+      Soundcloud: https://soundcloud.com/houseum\n
+      Facebook: https://www.facebook.com/houseum.yt\n
+      Instagram: https://www.instagram.com/houseumrecords\n
+      \n
+      The beautiful cat and his best friend the bird have been made by Yoko Tanji\n
+      \n
+      Peace
+      """
+    +"customUrl": "houseum"
+    +"publishedAt": "2016-05-09T17:50:55.000Z"
+    +"thumbnails": {#622
+      +"default": {#611
+        +"url": "https://yt3.ggpht.com/a-/AJLlDp25AOFH3c_0FYcyPs-obndGWC210--doUV6gw=s88-mo-c-c0xffffffff-rj-k-no"
+        +"width": 88
+        +"height": 88
+      }
+      +"medium": {#616
+        +"url": "https://yt3.ggpht.com/a-/AJLlDp25AOFH3c_0FYcyPs-obndGWC210--doUV6gw=s240-mo-c-c0xffffffff-rj-k-no"
+        +"width": 240
+        +"height": 240
+      }
+      +"high": {#615
+        +"url": "https://yt3.ggpht.com/a-/AJLlDp25AOFH3c_0FYcyPs-obndGWC210--doUV6gw=s800-mo-c-c0xffffffff-rj-k-no"
+        +"width": 800
+        +"height": 800
+      }
+    }
+    +"localized": {#613
+      +"title": "Houseum"
+      +"description": """
+        Listening to House music is healthy\n
+        \n
+        For any contact (host on youtube or/and Premiere on Soundcloud): houseum.yt@gmail.com\n
+        Soundcloud: https://soundcloud.com/houseum\n
+        Facebook: https://www.facebook.com/houseum.yt\n
+        Instagram: https://www.instagram.com/houseumrecords\n
+        \n
+        The beautiful cat and his best friend the bird have been made by Yoko Tanji\n
+        \n
+        Peace
+        """
+    }
+    +"country": "FR"
+  }
+  +"contentDetails": {#620
+    +"relatedPlaylists": {#627
+      +"uploads": "UU58C_BhzlZIJTeomuVSD2lA"
+      +"watchHistory": "HL"
+      +"watchLater": "WL"
+    }
+  }
+  +"statistics": {#629
+    +"viewCount": "31196534"
+    +"commentCount": "0"
+    +"subscriberCount": "106841"
+    +"hiddenSubscriberCount": false
+    +"videoCount": "1001"
+  }
+}
+[2018-05-15 17:01:11] Processed:  App\Jobs\FetchChannel
+[2018-05-21 10:41:39] Processing: App\Jobs\FetchChannel
+[2018-05-21 10:41:56] Processed:  App\Jobs\FetchChannel
+[2018-05-21 10:45:12] Processing: App\Jobs\FetchChannel
+[2018-05-21 10:46:04] Processed:  App\Jobs\FetchChannel
+[2018-05-24 15:33:06] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:34:36] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:36:07] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:36:57] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:38:28] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:39:58] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:39:58] Failed:     App\Jobs\FetchChannel
+[2018-05-24 15:40:18] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:41:47] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:41:47] Failed:     App\Jobs\FetchChannel
+[2018-05-24 15:42:37] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:44:07] Processing: App\Jobs\FetchChannel
+[2018-05-24 15:44:08] Failed:     App\Jobs\FetchChannel
+[2018-05-24 15:46:21] Failed:     App\Jobs\FetchChannel
+[2018-05-24 15:46:47] Processed:  App\Jobs\FetchChannel
+[2018-05-24 15:48:16] Processed:  App\Jobs\FetchChannel
+[2018-05-24 15:50:43] Processed:  App\Jobs\FetchChannel

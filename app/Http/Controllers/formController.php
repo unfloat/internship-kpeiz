@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Illuminate\Http\Request;
 use Session;
 
@@ -18,10 +17,7 @@ class formController extends Controller
 
         Session::save();
 
-        $channeldata = Auth::user()->channels()->take(10)->get();
-        //dd($view);
-
-        return view('dashboard', compact($channeldata));
+        return redirect()->back();
     }
 
     // public function putPeriod(Request $request)
@@ -35,11 +31,10 @@ class formController extends Controller
     //     return view('dashboard');
     // }
 
-    // public function pickFromSavedChannels(Request $request)
+    // public function setVideo(Request $request)
     // {
-    //     Session::put('channel', $request->pichedSavedChannel);
-    //     Session::save();
-    //     return view('dashboard', compact(app('channel')));
+    //     $videos =
+    //     return redirect()->back();
     // }
 
     public function setAccount(Request $request)
@@ -48,8 +43,24 @@ class formController extends Controller
             dd('error');
         }
         //dd($request->all());
-        Session::put('channel_id', $request->id);
 
-        return redirect('dashboard');
+        Session::put('channel_id', $request->id);
+        // Session::put('playlist', Playlist::where('channel_id', app('channel')->id)->first());
+        Session::save();
+
+        return redirect()->back();
+    }
+
+    public function setPlaylist(Request $request)
+    {
+        if (!$request->has('id')) {
+            dd('error');
+        }
+        //dd($request->all());
+
+        Session::put('playlist_id', $request->id);
+        Session::save();
+
+        return redirect()->back();
     }
 }

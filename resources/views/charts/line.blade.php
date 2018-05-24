@@ -20,13 +20,17 @@ var myLineChart = new Chart(ctx, {
         gridLines: {
           display: false
         },
-        ticks: {
-          maxTicksLimit: 7
+         ticks: {
+            stepSize: 1,
+            min: 0,
+            autoSkip: false
         }
       }],
       yAxes: [{
         ticks: {
-          maxTicksLimit: 5
+          maxTicksLimit: 0,
+
+          autoSkip: false
         },
         gridLines: {
           color: "rgba(0, 0, 0, .125)",

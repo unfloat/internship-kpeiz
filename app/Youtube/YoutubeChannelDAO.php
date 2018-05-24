@@ -23,17 +23,20 @@ class YoutubeChannelDAO
 
     // }
 
-    // public static function saveChannels($data, $type)
-    // {
-    //     foreach ($data->items as $channel) {
-    //         self::saveChannel($channel, $channelID);
-    //     }
-    // }
+    public static function saveChannels($data, $user_id)
+    {
+
+        // dd($data);
+
+        foreach ($data as $key => $channel) {
+            self::saveChannel($channel, $user_id);
+        }
+    }
 
     public static function saveChannel($data, $user_id)
     {
 
-        //dd($data);
+        //dd(head($data->items));
 
         if (count($data->items) == 0) {
             dd('no items');
@@ -86,7 +89,7 @@ class YoutubeChannelDAO
             foreach ($uploadedVideos->items as $uploadedVideo) {
                 $id   = $uploadedVideo->contentDetails->videoId;
                 $data = YoutubeAdapter::getVideobyVideoId($id);
-                //dd($data);
+                // dd($data);
                 YoutubeVideoDAO::saveVideos($data, $channelArray['uploads'], $channelArray['title']);
             }
         }
@@ -96,7 +99,7 @@ class YoutubeChannelDAO
         // return view('dashboard');
     }
 
-    // public static function convertToChannel($data, $type,$user_id)
+// public static function convertToChannel($data, $type,$user_id)
     public static function convertToChannel($data, $user_id)
     {
 
