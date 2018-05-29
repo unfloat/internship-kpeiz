@@ -1,7 +1,8 @@
 <div class="breadcrumb-header">
     <div class="row">
         <div class="col-sm-8" > {{-- col-sm- --}}
-            <p>Playlist</p>
+
+            <p><!-- {{ (app('playlist') != null) ? app('playlist')->title : 'All Playlists'}} --> </p>
         </div>
         <div class="col-sm-4"> {{-- col-sm-6  --}}
 
@@ -9,10 +10,10 @@
         </div>
     </div>
 
-    <!-- savedChannelModal modal-->
+     <!-- savedChannelModal modal -->
     <div class="modal fade" id="playistModal" tabindex="-1" role="dialog" aria-labelledby="playistModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <!-- Modal content-->
+            <!-- Modal content -->
             <div class="modal-content" >
                 <div class="modal-header">
                     <h5 class="modal-title"  id="playistModalLabel" >Channel's Playlists Pick</h5>
@@ -26,13 +27,13 @@
                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select from Playlists
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            @foreach($savedPlaylists as $key => $playlist)
+                            @foreach($playlists as $key => $playlist)
 
 
 
 
                             <li>
-                                {{--   <button class="btn btn-success">{{ app('channel')->id == $channel['id'] ? 'Selected' : 'Select' }}<input type="hidden" name="id" value={{ $channel['id'] }}></button> --}}
+                                 <input type="hidden" name="id" value={{ $key }}>
                                 <form action= "{{ url('/setplaylist')}}" class = "form-inline" method="POST" data-toggle="validator">
                                     {{ csrf_field() }}
                                     <button class="btn btn-primary">
@@ -43,7 +44,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    {{-- <button class="btn btn-primary" type="submit" >Choisir</button> --}}
+                    <button class="btn btn-primary" type="submit" >Choisir</button>
 
                 </div>
                 <div class="modal-footer">

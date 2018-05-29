@@ -15,7 +15,8 @@ class ChannelController extends Controller {
 	}
 
 	public function getMetrics() {
-		//com
+
+		/*dd(app('since'), app('until'));*/
 
 		$id = (app('channel')->id);
 		$since = app('since');
@@ -37,7 +38,7 @@ class ChannelController extends Controller {
 		$finals[$data['title']] = $this->charts->getChart($data['channel_metric'],
 			[
 				'bar' => ['subscriberCount'],
-				'line' => ['subscriberCount'],
+				'line' => ['viewCount'],
 				'pie' => ['viewCount', 'subscriberCount', 'commentCount'],
 
 			]

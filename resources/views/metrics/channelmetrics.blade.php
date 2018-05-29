@@ -28,10 +28,10 @@
     @if(isset($finals))
     @foreach($finals as $key => $final )
 
-    <div class="">{{ 'Channel : '.$key }} </div>
+    <!-- <div class="">{{ 'Channel : '.$key }} </div> -->
     @foreach ($final as $key => $charts)
     @foreach ($charts as $key => $chart)
-    <i class="fa fa-area-chart"></i> {{$chart->title}}
+    <i class="fa fa-area-chart"></i> {{config('chartsLabels.'.$chart->title)}}
     <div class="card-body">
       <canvas id="{{ $chart->id }}" width="100%" height="30"></canvas>
     </div>

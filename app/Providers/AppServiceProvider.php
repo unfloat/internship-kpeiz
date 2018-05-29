@@ -7,100 +7,72 @@ use App\Playlist;
 use App\User;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Session;
 
-class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
+class AppServiceProvider extends ServiceProvider {
+	/**
+	 * Bootstrap any application services.
+	 *
+	 * @return void
+	 */
+	public function boot() {
+		//
 
-        view()->composer(['*'], function ($view) {
+		Schema::defaultStringLength(191);
 
-            // $savedChannels = Channel::where('user_id', Auth::user()->id);
-            $savedChannels = Auth::user()->channels()->get()->toArray();
+		view()->composer(['metrics.channelmetrics', 'metrics.playlistmetrics'], function ($view) {
 
-            //...with this variable
-            $view->with('savedChannels', $savedChannels);
-        });
-        view()->composer(['*'], function ($view) {
-            $since        = app('since');
-            $until        = app('until');
-            $playlistdata = app('channel')->load(
-                ([
-                    'playlists' => function ($query) use ($since, $until) {
-                        $query->whereBetween('playlists.created_at', [$since, $until]);},
+			// $savedChannels = Channel::where('user_id', Auth::user()->id);
+			$savedChannels = Auth::user()->channels()->get()->toArray();
 
-                ])
-            )->toArray();
-
-            $playlistdata = app('channel')->load(
-                ([
-                    'playlists' => function ($query) {
-                        $query->whereBetween('playlists.created_at', [app('since'), app('until')]);},
-
-                ])
-            )->toArray();
-
-            //dd($playlistdata, app('since'), app('until'));
-
-            foreach ($playlistdata as $key => $value) {
-                $savedPlaylists[$value['id']] = $value['title'];
-            }
-
-            // dd($savedPlaylists);
-
-            $view->with('savedPlaylists', $savedPlaylists);
-        });
-    }
+			//...with this variable
+			$view->with('savedChannels', $savedChannels);
+		});
+	}
 
 /**
  * Register any application services.
  *
  * @return void
  */
-    public function register()
-    {
-        $this->app->singleton('since', function ($app) {
-            if (!Session::has('since')) {
-                return Carbon::now()->subMonths(1);
-            }
-            return Carbon::parse(Session::get('since'));
-        });
+	public function register() {
+		$this->app->singleton('since', function ($app) {
+			if (!Session::has('since')) {
+				return Carbon::now()->subMonths(1);
+			}
+			return Carbon::parse(Session::get('since'));
+		});
 
-        $this->app->singleton('until', function ($app) {
-            if (!Session::has('until')) {
-                return Carbon::now();
-            }
-            return Carbon::parse(Session::get('until'));
-        });
+		$this->app->singleton('until', function ($app) {
+			if (!Session::has('until')) {
+				return Carbon::now();
+			}
+			return Carbon::parse(Session::get('until'));
+		});
 
-        $this->app->singleton('channel', function ($app) {
+		$this->app->singleton('channel', function ($app) {
 
-            if (!Session::has('channel_id') && Auth::user()->channels()->count()) {
-                return Auth::user()->channels()->first();
-            } elseif (!Session::has('channel_id')) {
-                return Channel::where('user_id', Auth::user()->id)->first();
-            }
+			if (!Session::has('channel_id') && Auth::user()->channels()->count()) {
 
-            return Channel::find(Session::get('channel_id'));
-        });
+				return Auth::user()->channels()->first();
+			} elseif (!Session::has('channel_id')) {
+				return Channel::where('user_id', Auth::user()->id)->first();
+			}
 
-        $this->app->singleton('playlist', function ($app) {
+			return Channel::find(Session::get('channel_id'));
+		});
 
-            if (!Session::has('playlist_id') && Auth::user()->channels()->playlists()->count()) {
-                return Playlist::where('channel_id', app('channel')->id)->first();;
-            } elseif (!Session::has('playlist_id')) {
-                return Playlist::where('channel_id', app('channel')->id)->first();
-            }
+		$this->app->singleton('playlist', function ($app) {
 
-            return Playlist::find(Session::get('playlist_id'));
-        });
-    }
+			if (!Session::has('playlist_id') && Auth::user()->channels()->playlists()->count()) {
+				return Playlist::where('channel_id', app('channel')->id)->first();;
+			} elseif (!Session::has('playlist_id')) {
+				return Playlist::where('channel_id', app('channel')->id)->first();
+			}
+
+			return Playlist::find(Session::get('playlist_id'));
+		});
+	}
 };

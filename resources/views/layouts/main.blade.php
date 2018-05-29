@@ -58,12 +58,12 @@
 
          <!-- Page Inner -->
          <div class="page-inner">
-                @if(Session::has('msg'))
+              <!--   @if(Session::has('msg'))
                   <div class="alert alert-{{  Session::get('msg')['type'] }} alert-dismissible" role="alert" style="margin-bottom:0;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                     {{  Session::get('msg')['text'] }}
                   </div>
-                @endif
+                @endif -->
            <div class="page-title">
 
 

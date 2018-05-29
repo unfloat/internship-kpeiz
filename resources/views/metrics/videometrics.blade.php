@@ -9,6 +9,8 @@
 
 
 <div class="row">
+
+
 	@include('layouts.partials.breadcrumbedheader')
 		@include('layouts.partials.breadcrumbedplaylistheader')
 	@include('layouts.partials.breadcrumbedvideoheader')

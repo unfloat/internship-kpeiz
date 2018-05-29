@@ -11,35 +11,33 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class FetchChannel implements ShouldQueue
-{
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+class FetchChannel implements ShouldQueue {
+	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $data;
-    protected $user;
+	protected $data;
+	protected $user;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct($data, User $user)
-    {
-        $this->data = $data;
-        $this->user = $user;
-    }
+	/**
+	 * Create a new job instance.
+	 *
+	 * @return void
+	 */
+	public function __construct($data, User $user) {
+		$this->data = $data;
+		$this->user = $user;
+	}
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle()
-    {
+	/**
+	 * Execute the job.
+	 *
+	 * @return void
+	 */
+	public function handle() {
 
-        ('channel' == $this->data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($this->data['channel']) : $channeldata = YoutubeAdapter::getUserChannel($this->data['channel']);
-        //dd($channeldata);
-        YoutubeChannelDAO::saveChannel($channeldata, $this->user->id);
+		('channel' == $this->data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($this->data['channel']) :
+		$channeldata = YoutubeAdapter::getUserChannel($this->data['channel']);
 
-    }
+		YoutubeChannelDAO::saveChannel($channeldata, $this->user->id);
+
+	}
 }

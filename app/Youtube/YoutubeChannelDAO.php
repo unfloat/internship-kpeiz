@@ -8,154 +8,146 @@ use App\ChannelMetric;
 use App\Youtube\YoutubePlaylistDAO;
 use Carbon\Carbon;
 
-class YoutubeChannelDAO
-{
+class YoutubeChannelDAO {
 
-    public function __construct()
-    {
-        //
-    }
+	public function __construct() {
+		//
+	}
 
-    // public static function saveChannels($data)
-    // {
-    //     //dd(Carbon::now()->toDateString());
-    //     foreach ($info->statistics as $key => $value)
+	// public static function saveChannels($data)
+	// {
+	//     //dd(Carbon::now()->toDateString());
+	//     foreach ($info->statistics as $key => $value)
 
-    // }
+	// }
 
-    public static function saveChannels($data, $user_id)
-    {
+	public static function saveChannels($data, $user_id) {
 
-        // dd($data);
+		// dd($data);
 
-        foreach ($data as $key => $channel) {
-            self::saveChannel($channel, $user_id);
-        }
-    }
+		foreach ($data as $key => $channel) {
+			self::saveChannel($channel, $user_id);
+		}
+	}
 
-    public static function saveChannel($data, $user_id)
-    {
+	public static function saveChannel($data, $user_id) {
 
-        //dd(head($data->items));
+		if (count($data->items) == 0) {
+			dd('no items');
+		}
 
-        if (count($data->items) == 0) {
-            dd('no items');
-        }
+		// dd($data);
 
-        // dd($data);
+		$channelArray = self::convertToChannel(head($data->items), $user_id);
+		/*dd($user_id);*/
+		$channel = Channel::firstOrCreate(
+			['id' => $channelArray['id']],
+			$channelArray);
+		dd($channel);
 
-        $channelArray = self::convertToChannel(head($data->items), $user_id);
-        //dd($channelArray);
-        $channel = Channel::firstOrCreate(
-            ['id' => $channelArray['id']],
-            $channelArray);
+		$channelData = self::convertToChannelData(head($data->items), $channelArray['id']);
 
-        $channelData = self::convertToChannelData(head($data->items), $channelArray['id']);
+		$channelData->each(function ($data) {
+			ChannelData::firstOrCreate(['label' => $data['label'], 'channel_id' => $data['channel_id']], $data);
+		});
 
-        $channelData->each(function ($data) {
-            ChannelData::firstOrCreate(['label' => $data['label'], 'channel_id' => $data['channel_id']], $data);
-        });
+		$channelMetric = self::convertToChannelMetric(head($data->items), $channelArray['id']);
+		//dd($channelMetric);
+		// $channelMetric->each(function ($metric) {
+		//     ChannelMetric::updateOrCreate(['label' => $metric['label'], 'channel_id' => $metric['channel_id'], 'date' => Carbon::now()->toDatestring()], $metric);
+		// });
 
-        $channelMetric = self::convertToChannelMetric(head($data->items), $channelArray['id']);
-        //dd($channelMetric);
-        // $channelMetric->each(function ($metric) {
-        //     ChannelMetric::updateOrCreate(['label' => $metric['label'], 'channel_id' => $metric['channel_id'], 'date' => Carbon::now()->toDatestring()], $metric);
-        // });
+		$channelMetric->each(function ($metric) {
+			ChannelMetric::firstOrCreate(
+				[
+					'label' => $metric['label'],
+					'channel_id' => $metric['channel_id'],
+					'date' => $metric['date'],
+					//Retrieve metric by 'date' and 'channel_id, or create it if it doesn't exist...
+				],
+				$metric);
+		});
 
-        $channelMetric->each(function ($metric) {
-            ChannelMetric::firstOrCreate(
-                [
-                    'label'      => $metric['label'],
-                    'channel_id' => $metric['channel_id'],
-                    'date'       => $metric['date'],
-                    //Retrieve metric by 'date' and 'channel_id, or create it if it doesn't exist...
-                ],
-                $metric);
-        });
+		$savedId = $channelArray['id'];
 
-        $savedId = $channelArray['id'];
+		$playlistdata = YoutubeAdapter::getPlaylistByChannelId($savedId);
 
-        $playlistdata = YoutubeAdapter::getPlaylistByChannelId($savedId);
+		YoutubePlaylistDAO::savePlaylists($playlistdata, $savedId, $channelArray['title']);
 
-        YoutubePlaylistDAO::savePlaylists($playlistdata, $savedId, $channelArray['title']);
+		//dd($channelArray['uploads']);
 
-        //dd($channelArray['uploads']);
+		//$videos = YoutubeAdapter::getChannelActivities($savedId);
 
-        //$videos = YoutubeAdapter::getChannelActivities($savedId);
+		if (isset($channelArray['uploads'])) {
+			$uploadedVideos = YoutubeAdapter::getVideosByPlaylistId($channelArray['uploads']);
+			//dd($uploadedVideos->items);
+			foreach ($uploadedVideos->items as $uploadedVideo) {
+				$id = $uploadedVideo->contentDetails->videoId;
+				$data = YoutubeAdapter::getVideobyVideoId($id);
+				// dd($data);
+				YoutubeVideoDAO::saveVideos($data, $channelArray['uploads'], $channelArray['title']);
+			}
+		}
+		//dd($data);
 
-        if (isset($channelArray['uploads'])) {
-            $uploadedVideos = YoutubeAdapter::getVideosByPlaylistId($channelArray['uploads']);
-            //dd($uploadedVideos->items);
-            foreach ($uploadedVideos->items as $uploadedVideo) {
-                $id   = $uploadedVideo->contentDetails->videoId;
-                $data = YoutubeAdapter::getVideobyVideoId($id);
-                // dd($data);
-                YoutubeVideoDAO::saveVideos($data, $channelArray['uploads'], $channelArray['title']);
-            }
-        }
-        //dd($data);
-
-        return true;
-        // return view('dashboard');
-    }
+		return true;
+		// return view('dashboard');
+	}
 
 // public static function convertToChannel($data, $type,$user_id)
-    public static function convertToChannel($data, $user_id)
-    {
+	public static function convertToChannel($data, $user_id) {
 
-        $channel = [];
+		$channel = [];
 
-        $channel['id']           = $data->id;
-        $channel['title']        = $data->snippet->title;
-        $channel['user_id']      = $user_id;
-        $channel['description']  = $data->snippet->description;
-        $channel['published_at'] = Carbon::parse($data->snippet->publishedAt)->toDateString();
-        $channel['uploads']      = $data->contentDetails->relatedPlaylists->uploads;
+		$channel['id'] = $data->id;
+		$channel['title'] = $data->snippet->title;
+		$channel['user_id'] = $user_id;
+		$channel['description'] = $data->snippet->description;
+		$channel['published_at'] = Carbon::parse($data->snippet->publishedAt)->toDateString();
+		$channel['uploads'] = $data->contentDetails->relatedPlaylists->uploads;
 
-        return $channel;
-    }
+		return $channel;
+	}
 
-    public static function convertToChannelData($data, $channelId)
-    {
+	public static function convertToChannelData($data, $channelId) {
 
-        $thumbnail['label']      = 'thumbnail';
-        $thumbnail['value']      = $data->snippet->thumbnails->default->url;
-        $thumbnail['type']       = 'string';
-        $thumbnail['channel_id'] = $channelId;
+		$thumbnail['label'] = 'thumbnail';
+		$thumbnail['value'] = $data->snippet->thumbnails->default->url;
+		$thumbnail['type'] = 'string';
+		$thumbnail['channel_id'] = $channelId;
 
-        $subCount['label']      = 'hiddenSubscriberCount';
-        $subCount['value']      = $data->statistics->hiddenSubscriberCount;
-        $subCount['type']       = 'boolean';
-        $subCount['channel_id'] = $channelId;
+		$subCount['label'] = 'hiddenSubscriberCount';
+		$subCount['value'] = $data->statistics->hiddenSubscriberCount;
+		$subCount['type'] = 'boolean';
+		$subCount['channel_id'] = $channelId;
 
-        if (isset($data->snippet->country)) {
-            $country['label']      = 'country';
-            $country['value']      = $data->snippet->country;
-            $country['type']       = 'string';
-            $country['channel_id'] = $channelId;
+		if (isset($data->snippet->country)) {
+			$country['label'] = 'country';
+			$country['value'] = $data->snippet->country;
+			$country['type'] = 'string';
+			$country['channel_id'] = $channelId;
 
-            return collect(compact('country', 'thumbnail', 'subCount'));
-        }
-        return collect(compact('thumbnail', 'subCount'));
-    }
+			return collect(compact('country', 'thumbnail', 'subCount'));
+		}
+		return collect(compact('thumbnail', 'subCount'));
+	}
 
-    public static function convertToChannelMetric($data, $channelId)
-    {
-        $dataMetrics = [];
-        foreach ($data->statistics as $key => $element) {
-            if ('hiddenSubscriberCount' == $key) {
-                continue;
-            }
+	public static function convertToChannelMetric($data, $channelId) {
+		$dataMetrics = [];
+		foreach ($data->statistics as $key => $element) {
+			if ('hiddenSubscriberCount' == $key) {
+				continue;
+			}
 
-            $temp['label']      = $key;
-            $temp['value']      = $element;
-            $temp['type']       = 'int';
-            $temp['channel_id'] = $channelId;
-            $temp['date']       = Carbon::now()->toDateString();
+			$temp['label'] = $key;
+			$temp['value'] = $element;
+			$temp['type'] = 'int';
+			$temp['channel_id'] = $channelId;
+			$temp['date'] = Carbon::now()->toDateString();
 
-            $dataMetrics[] = $temp;
-        }
+			$dataMetrics[] = $temp;
+		}
 
-        return collect($dataMetrics);
-    }
+		return collect($dataMetrics);
+	}
 }
