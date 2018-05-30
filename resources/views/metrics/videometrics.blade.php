@@ -12,8 +12,15 @@
 
 
 	@include('layouts.partials.breadcrumbedheader')
-		@include('layouts.partials.breadcrumbedplaylistheader')
-	@include('layouts.partials.breadcrumbedvideoheader')
+
+	  @if(Session::has('msg'))
+                  <div class="alert alert-{{  Session::get('msg')['type'] }} alert-dismissible" role="alert" style="margin-bottom:0;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    {{  Session::get('msg')['text'] }}
+                  </div>
+                @endif
+
+
 
 	@if(isset($videos))
 
@@ -60,7 +67,8 @@
 		<div class="panel panel-white">
 			<div class="panel-body">
 				<div class="panel-heading clearfix">
-					<h4 class="panel-title">{{ 'Chart : '.$chart->title }}</h4>
+					<h4 class="panel-title"> Chart :{{ config('chartsLabels.'.$chart->title) }}</h4>
+
 				</div>
 				<canvas id="{{ $chart->id }}" width="578" height="289"></canvas>
 			</div>

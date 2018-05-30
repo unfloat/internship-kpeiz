@@ -24,8 +24,8 @@
   <link rel="stylesheet" href="{{asset('assets/plugins/datatables/css/jquery.datatables_themeroller.css')}}" type="text/css">
   <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-datepicker/css/datepicker3.css')}}" type="text/css">
   <!-- Theme Styles -->
-  <link href="{{asset('/css/space.min.css')}}" rel="stylesheet">
-  <link href="{{asset('/css/custom.css')}}" rel="stylesheet">
+  <link href="{{asset('css/space.min.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css">
   {{-- @endsection --}}
   @yield('css')
 

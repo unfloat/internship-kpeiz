@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Helpers\ActiveMetrics;
 use App\Helpers\CreateChart;
 use App\Helpers\VideoStats;
-use Session;
 
 class VideoController extends Controller {
 	//
@@ -20,40 +19,46 @@ class VideoController extends Controller {
 		$this->activeVideo = $activeVideo;
 	}
 
-	public function getMetrics() {
-		$id = (app('channel')->id);
+	public function getVideos() {
 		$since = app('since');
 		$until = app('until');
 
-		// $data = app('channel')->load(
-		//     (['channelMetric' => function ($query) use ($since, $until) {
-		//         $query->whereBetween('date', [$since, $until]);
-		//     }, 'videos' => function ($query) use ($since, $until) {
-		//         $query->whereBetween('videos.published_at', [$since, $until]);
-		//     }, 'playlists' => function ($query) use ($since, $until) {
-		//         $query->whereBetween('published_at', [$since, $until]);
-		//     },
-		//     ])
-		// )->toArray();
-
-		//dd(app('playlist')->title, $since , $until);
-
-		Session::get('video') ? $this->activeVideo->getActive('video', $since, $until) : $videoData = app('playlist')->load(
-			(
-				['videos' => function ($query) use ($since, $until) {
-					$query->whereBetween('videos.created_at', [$since, $until]);},
-
-				])
+		$videodata = app('channel')->load(
+			['videos' => function ($query) use ($since, $until) {
+				$query->whereBetween('videos.created_at', [$since, $until]);
+			}]
 		)->toArray();
 
-		//dd($videodata, $since, $until);
-		// try {
-		//dd($videodata);
+		/*dd($videodata);*/
 
-		foreach ($videodata['videos'] as $key => $data) {
-			$videos[$data['title']] = $data['data']['thumbnail'];
+		return view('videos', compact('videodata'));
 
-			$finals[$data['id']] = $this->charts->getChart($data['video_metrics'],
+	}
+
+	public function getMetrics($id) {
+		/*$id = (app('channel')->id);*/
+		$since = app('since');
+		$until = app('until');
+
+/*		if ($request->get('id')) {
+
+Session::put('video_id', $request->id);
+
+}*/
+
+		$data = app('channel')->load(
+			[
+				'videos' => function ($query) use ($since, $until, $id) {
+					$query->where('videos.id', $id)->whereBetween('videos.created_at', [$since, $until]);
+				}]
+		)->toArray();
+
+		//dd($data);
+
+		foreach ($data['videos'] as $key => $videodata) {
+			$videos[$videodata['title']] = $videodata['data']['thumbnail'];
+
+			$finals[$videodata['id']] = $this->charts->getChart($videodata['video_metrics'],
 				[
 					'bar' => ['viewCount'],
 
@@ -61,7 +66,10 @@ class VideoController extends Controller {
 					'pie' => ['likeCount', 'dislikeCount'],
 
 				]);
+
+			$indicators[$videodata['id']] = $this->videoStats->getBasicIndicators($videodata['video_metrics']);
 		}
+		//dd($videos, $finals);
 
 		//dd($videos, $finals);
 

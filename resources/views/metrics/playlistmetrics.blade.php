@@ -4,8 +4,14 @@
 @endsection
 @section('content')
 @include('layouts.partials.breadcrumbedheader')
-@include('layouts.partials.breadcrumbedplaylistheader')
+
 <div class="row">
+	   @if(Session::has('msg'))
+                  <div class="alert alert-{{  Session::get('msg')['type'] }} alert-dismissible" role="alert" style="margin-bottom:0;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    {{  Session::get('msg')['text'] }}
+                  </div>
+                @endif
 	<!--
 	<div class="col-md-12"> -->
 		@if(isset($playlists))
@@ -17,41 +23,47 @@
 						<h4 class="panel-title">{{$playlist}}</h4>
 					</div>
 					@if(isset($infos))
-						@foreach ($infos[$key] as $info)
+						@foreach ($infos[$key] as $label => $info)
 					<div class="panel-body">
+							@if ($label === "thumbnail")
+							<img src="{{$info}}">
+							@endif
 
-
-							<img src="{{$info['thumbnail']}}" alt="">
+						    @if ($label === "published_at")
+							   <p class="stats-info">{{config('chartsLabels.'.$label)}}</p>
+							   <span class="stats-number">{{$info}}</span>
+							   @endif
 
 
 					</div>
 
+					@endforeach
+					@endif
 
 
 					<div class="panel-footer">
-						<div class="caption">
-							 <div class="pull-left">
-          <span class="stats-number">{{$info['published_at']}}</span>
-          <p class="stats-info">{{ config('chartsLabels.'.$info)}}</p>
+						<div class="pull-left">
+									@if(isset($indicators))
+						@foreach ($indicators[$key] as $label => $indicator)
+
+          <span class="stats-number">{{$indicator}}</span>
+          <p class="stats-info">{{ config('chartsLabels.'.$label)}}</p>
+          @endforeach
+			@endif
         </div>
 
-
-
-
-
+        </div>
 
 						</div>
-
 					</div>
-					@endforeach
-			@endif
+
 				</div>
-			</div>
 
-
-		</div>
 		@endforeach
 			@endif
+
+		</div>
+
 		@endsection
 		@section('js')
 		@if(isset($finals))

@@ -1,6 +1,11 @@
-/* Write your custom CSS here */
 .z{
     background-color: red; 
     font-size: 24px;
     color: darkgoldenrod;
+}
+
+#playlist-thumbnail-datatable{
+
+    height: 20%;
+    width: 20%;
 }

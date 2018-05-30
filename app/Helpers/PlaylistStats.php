@@ -7,9 +7,9 @@ class PlaylistStats {
 	public function getBasicIndicators($metrics) {
 		//dd($metrics);
 
-		foreach ($metrics as $element) {
+		foreach ($metrics as $key => $metric) {
 
-			$info[$element['label']] = $element['value'];
+			$info[$key] = $metric;
 		}
 
 		return $info;
@@ -18,9 +18,9 @@ class PlaylistStats {
 	public function getBasicInfo($data) {
 		/*dd($data);*/
 
-		foreach ($data as $element) {
+		foreach ($data as $key => $element) {
 
-			$info[$element['label']] = $element['value'];
+			$info[$key] = $element;
 		}
 		//dd($info);
 

@@ -1,10 +1,14 @@
 @extends('layouts.main')
 @section('content')
+
+
 <div class="panel panel-white">
     <div class="panel-heading">
         <h4 class="panel-title">Selected Channels</h4>
     </div>
     <div class="panel-body">
+
+        @include('layouts.partials.breadcrumbedheader')
 
         @if(Session::has('msg'))
                   <div class="alert alert-{{  Session::get('msg')['type'] }} alert-dismissible" role="alert" style="margin-bottom:0;">
@@ -18,42 +22,46 @@
                 <thead>
                     <tr>
 
-                        <th>Channel Title</th>
+                        <th>Playlist Title</th>
                         <th>Published At</th>
-                        <th>SUBSCRIBERS</th>
-                        <th>VIEWS</th>
-                        <th>Metriques</th>
+                        <th>Videos</th>
+                        <th>Show</th>
+
 
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
 
-                        <th>Channel Title</th>
+                        <th>Playlist Title</th>
                         <th>Published At</th>
-                        <th>SUBSCRIBERS</th>
-                        <th>VIEWS</th>
-                        <th>Metriques</th>
+                        <th>Videos</th>
+                        <th>Show</th>
+
 
                     </tr>
                 </tfoot>
                 <tbody>
-                    @if(!isset($channeldata))
+                    @if(!isset($playlistsdata))
                     <tr class="odd"><td valign="top" colspan="6" class="dataTables_empty">No data available in table</td></tr>
                     @endif
-                    @if(isset($channeldata))
-                    @foreach($channeldata as $channel)
+                    @if(isset($playlistsdata))
+
+                    @foreach($playlistsdata['playlists'] as $playlist)
                     <tr>
+                        <th>{{$playlist['title']}}</th>
+                        <th>{{$playlist['published_at']}}</th>
+                        <th>{{$playlist['metrics']['item_count']}}</th>
+                        <!-- <th>
+                            <img id="playlist-thumbnail-datatable" src="{{$playlist['data']['thumbnail']}}" >
+                        </th> -->
 
-                        <th>{{$channel['title']}}</th>
-                        <th>{{$channel['published_at']}}</th>
-                        <th>{{ isset($channel['metrics']['subscriberCount']) ? $channel['metrics']['subscriberCount'] : 'unknown' }}</th>
-                        <th>{{ isset($channel['metrics']['viewCount']) ? $channel['metrics']['viewCount'] : 'unknown'}}</th>
+
                         <th>
-                            <form  action="{{route('setAccount')}}" method ="POST">
-                                {{ csrf_field() }}
 
-                                <button class="btn btn-success">{{ app('channel')->id == $channel['id'] ? 'Selected' : 'Select' }}<input type="hidden" name="id" value={{ $channel['id'] }}></button>
+                                <!--  <button class="btn btn-success"><a href="{{ url('/videometrics')}}">Details</a></button> -->
+                                 <a href="{{ url('/playlistmetrics/'.$playlist['id']) }}" class="btn btn-xs btn-default"><i
+                                                    class="fa fa-pencil"></i></a>
 
 
 

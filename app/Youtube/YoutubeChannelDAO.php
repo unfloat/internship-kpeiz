@@ -39,11 +39,10 @@ class YoutubeChannelDAO {
 		// dd($data);
 
 		$channelArray = self::convertToChannel(head($data->items), $user_id);
-		/*dd($user_id);*/
+
 		$channel = Channel::firstOrCreate(
 			['id' => $channelArray['id']],
 			$channelArray);
-		dd($channel);
 
 		$channelData = self::convertToChannelData(head($data->items), $channelArray['id']);
 
@@ -74,10 +73,6 @@ class YoutubeChannelDAO {
 
 		YoutubePlaylistDAO::savePlaylists($playlistdata, $savedId, $channelArray['title']);
 
-		//dd($channelArray['uploads']);
-
-		//$videos = YoutubeAdapter::getChannelActivities($savedId);
-
 		if (isset($channelArray['uploads'])) {
 			$uploadedVideos = YoutubeAdapter::getVideosByPlaylistId($channelArray['uploads']);
 			//dd($uploadedVideos->items);
@@ -103,7 +98,7 @@ class YoutubeChannelDAO {
 		$channel['title'] = $data->snippet->title;
 		$channel['user_id'] = $user_id;
 		$channel['description'] = $data->snippet->description;
-		$channel['published_at'] = Carbon::parse($data->snippet->publishedAt)->toDateString();
+		$channel['published_at'] = Carbon::parse($data->snippet->publishedAt);
 		$channel['uploads'] = $data->contentDetails->relatedPlaylists->uploads;
 
 		return $channel;
@@ -143,7 +138,7 @@ class YoutubeChannelDAO {
 			$temp['value'] = $element;
 			$temp['type'] = 'int';
 			$temp['channel_id'] = $channelId;
-			$temp['date'] = Carbon::now()->toDateString();
+			$temp['date'] = Carbon::now();
 
 			$dataMetrics[] = $temp;
 		}

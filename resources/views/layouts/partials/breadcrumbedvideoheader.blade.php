@@ -4,12 +4,12 @@
 <div class="breadcrumb-header">
   <div class="row">
     <div class="col-sm-8" > {{-- col-sm- --}}
-       <p>Active Playlist: {{ app('playlist')->title }}</p>
+
    </div>
 
    <div class="col-sm-4"> {{-- col-sm-6  --}}
      <a title="Choisir un intervalle" data-toggle="modal" data-target="#dateModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-calendar"><span class="span">Period Filter</span></i></button></a>
-     <a title="Choisir une chaine" data-toggle="modal" data-target="#savedVideoModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-calendar"><span class="span"> Saved Channel Filter</span></i></button></a>
+
  </div>
 </div>
 

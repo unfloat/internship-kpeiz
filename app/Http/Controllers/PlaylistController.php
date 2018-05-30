@@ -17,50 +17,49 @@ class PlaylistController extends Controller {
 		$this->playlistStats = $playlistStats;
 		$this->activePlaylist = $activePlaylist;
 	}
-
-	public function getMetrics() {
-
+	public function getPlaylists() {
 		$since = app('since');
 		$until = app('until');
 
-		/*dd(app('playlist'));*/
-
-		/*	try {*/
-
-		/*if (Session::get('playlist')) {
-			$playlistsData = $this->activePlaylist->getActive('playlist', $since, $until);
-
-		} else {*/
-		$playlistsData = app('channel')->load([
+		$playlistsdata = app('channel')->load([
 			'playlists' => function ($query) use ($since, $until) {
 				$query->whereBetween('playlists.created_at', [$since, $until]);},
 
 		]
 		)->toArray();
 
+		return view('playlists', compact('playlistsdata'));
+	}
+
+	public function getMetrics() {
+
+		//dd($since, $until);
+
+		$playlistsData = $this->activePlaylist->getActive('playlist', $since, $until);
+
 		foreach ($playlistsData['playlists'] as $key => $value) {
-			//dd($value['playlist_data']);
+			//dd($value['data']);
 
 			$playlists[$value['id']] = $value['title'];
 
+			$indicators[$value['id']] = $this->playlistStats->getBasicIndicators($value['metrics']);
+
+			$infos[$value['id']] = $this->playlistStats->getBasicInfo($value['data']);
 			//$bestPlaylistVideos[] = Video::with(['videoMetrics'])->where(function ($query) use ($since, $until) {
 			/*
 				$query->orderBy('videoMetrics', 'asc');
 			})->where('playlist_id', $value['id'])->take(3)->get()->toArray();*/
 
-			/*$indicators[$value['id']] = $this->playlistStats->getBasicIndicators($value['playlist_metric']);*/
-			$infos[$value['id']] = $this->playlistStats->getBasicInfo($value['playlist_data']);
-
 		}
 
 		/*} catch (\Exception $e) {
-				Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data ']);
-				//dd(app('since'), app('until'));
-			}
-		*/
-		//dd($playlistsData, $since, $until);
+			Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data ']);
+			//dd(app('since'), app('until'));
+		}*/
 
-		return view('metrics.playlistmetrics', compact('infos', 'playlists'));
+		//dd($playlists, $infos);
+
+		return view('metrics.playlistmetrics', compact('infos', 'playlists', 'indicators'));
 	}
 
 }

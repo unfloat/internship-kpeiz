@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Channel;
 use App\Playlist;
 use App\User;
+use App\Video;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
@@ -22,7 +23,7 @@ class AppServiceProvider extends ServiceProvider {
 
 		Schema::defaultStringLength(191);
 
-		view()->composer(['metrics.channelmetrics', 'metrics.playlistmetrics'], function ($view) {
+		view()->composer(['metrics.channelmetrics', 'metrics.playlistmetrics', 'metrics.videometrics', 'playlists'], function ($view) {
 
 			// $savedChannels = Channel::where('user_id', Auth::user()->id);
 			$savedChannels = Auth::user()->channels()->get()->toArray();
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider {
 			//...with this variable
 			$view->with('savedChannels', $savedChannels);
 		});
+
 	}
 
 /**
@@ -64,10 +66,22 @@ class AppServiceProvider extends ServiceProvider {
 			return Channel::find(Session::get('channel_id'));
 		});
 
+		$this->app->singleton('video', function ($app) {
+
+			$playlistID = Playlist::where('channel_id', Session::get('channel_id'))->get()->first();
+
+			if (!Session::has('video_id')) {
+
+				return Video::where('playlist_id', $playlistID)->get()->first();
+			}
+
+			return Video::find(Session::get('video_id'));
+		});
+
 		$this->app->singleton('playlist', function ($app) {
 
 			if (!Session::has('playlist_id') && Auth::user()->channels()->playlists()->count()) {
-				return Playlist::where('channel_id', app('channel')->id)->first();;
+				return Playlist::where('channel_id', app('channel')->id)->first();
 			} elseif (!Session::has('playlist_id')) {
 				return Playlist::where('channel_id', app('channel')->id)->first();
 			}

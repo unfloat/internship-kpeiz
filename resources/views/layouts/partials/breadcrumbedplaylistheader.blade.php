@@ -28,10 +28,6 @@
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu">
                             @foreach($playlists as $key => $playlist)
-
-
-
-
                             <li>
                                  <input type="hidden" name="id" value={{ $key }}>
                                 <form action= "{{ url('/setplaylist')}}" class = "form-inline" method="POST" data-toggle="validator">

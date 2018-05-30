@@ -18,46 +18,61 @@
                 <thead>
                     <tr>
 
-                        <th>Channel Title</th>
+                        <th>Video Title</th>
                         <th>Published At</th>
-                        <th>SUBSCRIBERS</th>
-                        <th>VIEWS</th>
-                        <th>Metriques</th>
+                        <th>Vues</th>
+                        <th>Likes</th>
+                        <th>Dislikes</th>
+                        <th>Commentaires</th>
+                        <th>Action</th>
+
 
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
 
-                        <th>Channel Title</th>
+                        <th>Video Title</th>
                         <th>Published At</th>
-                        <th>SUBSCRIBERS</th>
-                        <th>VIEWS</th>
-                        <th>Metriques</th>
+                        <th>Vues</th>
+                        <th>Likes</th>
+                        <th>Dislikes</th>
+                        <th>Commentaires</th>
+                        <th>Action</th>
+
 
                     </tr>
                 </tfoot>
                 <tbody>
-                    @if(!isset($channeldata))
+                    @if(!isset($videodata))
                     <tr class="odd"><td valign="top" colspan="6" class="dataTables_empty">No data available in table</td></tr>
                     @endif
-                    @if(isset($channeldata))
-                    @foreach($channeldata as $channel)
+                    @if(isset($videodata))
+                    @foreach($videodata['videos'] as $video)
+
                     <tr>
 
-                        <th>{{$channel['title']}}</th>
-                        <th>{{$channel['published_at']}}</th>
-                        <th>{{ isset($channel['metrics']['subscriberCount']) ? $channel['metrics']['subscriberCount'] : 'unknown' }}</th>
-                        <th>{{ isset($channel['metrics']['viewCount']) ? $channel['metrics']['viewCount'] : 'unknown'}}</th>
+                        <th>{{$video['title']}}</th>
+                        <th>{{$video['published_at']}}</th>
+
+
+                        <th>{{$metrics['viewCount'] }}</th>
+                        <th>{{$metrics['likeCount']}}</th>
+                        <th>{{$metrics['dislikeCount']}}</th>
+                        <th>{{$metrics['commentCount']}}</th>
+
+
+
                         <th>
-                            <form  action="{{route('setAccount')}}" method ="POST">
-                                {{ csrf_field() }}
 
-                                <button class="btn btn-success">{{ app('channel')->id == $channel['id'] ? 'Selected' : 'Select' }}<input type="hidden" name="id" value={{ $channel['id'] }}></button>
+                                <!--  <button class="btn btn-success"><a href="{{ url('/videometrics')}}">Details</a></button> -->
+                                 <a href="{{ url('/videometrics/'.$video['id']) }}" class="btn btn-xs btn-default">
+                                    <i class="fa fa-pencil"></i></a>
 
 
 
-                            </form></th>
+                            </th>
+
                         </tr>
                         @endforeach
                         @endif
