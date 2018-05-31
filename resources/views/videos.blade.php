@@ -22,7 +22,6 @@
                         <th>Published At</th>
                         <th>Vues</th>
                         <th>Likes</th>
-                        <th>Dislikes</th>
                         <th>Commentaires</th>
                         <th>Action</th>
 
@@ -36,7 +35,6 @@
                         <th>Published At</th>
                         <th>Vues</th>
                         <th>Likes</th>
-                        <th>Dislikes</th>
                         <th>Commentaires</th>
                         <th>Action</th>
 
@@ -54,12 +52,11 @@
 
                         <th>{{$video['title']}}</th>
                         <th>{{$video['published_at']}}</th>
+                        <th>{{isset($video['metrics']['viewCount']) ? $video['metrics']['viewCount'] : 'unknown'}}</th>
+                        <th>{{isset($video['metrics']['likeCount']) ? $video['metrics']['likeCount'] : 'unknown'}}</th>
+                        <th>{{isset($video['metrics']['commentCount']) ? $video['metrics']['commentCount'] : 'unknown'}}</th>
 
 
-                        <th>{{$metrics['viewCount'] }}</th>
-                        <th>{{$metrics['likeCount']}}</th>
-                        <th>{{$metrics['dislikeCount']}}</th>
-                        <th>{{$metrics['commentCount']}}</th>
 
 
 
