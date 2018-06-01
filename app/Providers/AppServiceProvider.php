@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider {
 
 		Schema::defaultStringLength(191);
 
-		view()->composer(['metrics.channelmetrics', 'metrics.playlistmetrics', 'metrics.videometrics', 'playlists', 'videos'], function ($view) {
+		view()->composer(['metrics.channelmetrics', 'metrics.videometrics', 'playlists', 'videos'], function ($view) {
 
 			// $savedChannels = Channel::where('user_id', Auth::user()->id);
 			$savedChannels = Auth::user()->channels()->get()->toArray();
@@ -82,16 +82,15 @@ class AppServiceProvider extends ServiceProvider {
 
 		$this->app->singleton('savedPlaylists', function ($app) {
 
-			if (!Session::has('savedPlaylists')) {
-
-				$data = app('channel')->load(
-					['playlists']
-				)->toArray();
-				foreach ($data['playlists'] as $key => $playlistdata) {
-					$savedPlaylists[$playlistdata['id']] = $playlistdata['title'];
-				}
-				return $savedPlaylists;
+			$data = app('channel')->load(
+				['playlists']
+			)->toArray();
+			foreach ($data['playlists'] as $key => $playlistdata) {
+				$savedPlaylists[$playlistdata['id']] = $playlistdata['title'];
 			}
+
+			return $savedPlaylists;
+
 		});
 
 		$this->app->singleton('video', function ($app) {

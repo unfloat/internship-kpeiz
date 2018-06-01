@@ -37,7 +37,8 @@
     <!-- <div class="">{{ 'Channel : '.$key }} </div> -->
     @foreach ($final as $key => $charts)
     @foreach ($charts as $key => $chart)
-    <i class="fa fa-area-chart"></i> {{config('chartsLabels.'.$chart->title)}}
+    <i class="{{$chart->type == 'pie' ? 'fa fa-pie-chart' : 'fa fa-area-chart'}}"></i> {{config('chartsLabels.'.$chart->title)}}
+    <br><br>
     <div class="card-body">
       <canvas id="{{ $chart->id }}" width="100%" height="30"></canvas>
     </div>

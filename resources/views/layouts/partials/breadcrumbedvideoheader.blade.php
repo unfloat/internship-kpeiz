@@ -2,7 +2,7 @@
 <div class="panel panel-white">
     <div class="panel-body">
         <div class="panel-heading clearfix">
-            <h4 class="panel-title">Actions</h4>
+            <h4 class="panel-title">{{app('video')->title}}</h4>
         </div>
         <div class="panel-body">
 

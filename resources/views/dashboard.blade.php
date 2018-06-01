@@ -22,7 +22,7 @@
                         <th>Published At</th>
                         <th>SUBSCRIBERS</th>
                         <th>VIEWS</th>
-                        <th>Metriques</th>
+                        <th>Actions</th>
 
                     </tr>
                 </thead>
@@ -33,7 +33,7 @@
                         <th>Published At</th>
                         <th>SUBSCRIBERS</th>
                         <th>VIEWS</th>
-                        <th>Metriques</th>
+                        <th>Actions</th>
 
                     </tr>
                 </tfoot>
@@ -49,8 +49,7 @@
                         <th>{{$channel['published_at']}}</th>
                         <th>{{ isset($channel['metrics']['subscriberCount']) ? $channel['metrics']['subscriberCount'] : 'unknown' }}</th>
                         <th>{{ isset($channel['metrics']['viewCount']) ? $channel['metrics']['viewCount'] : 'unknown'}}</th>
-                        <th>
-                            <form  action="{{route('setAccount')}}" method ="POST">
+                        <th><form  action="{{route('setAccount')}}" method ="POST">
                                 {{ csrf_field() }}
 
                                 <button class="btn btn-success">{{ app('channel')->id == $channel['id'] ? 'Selected' : 'Select' }}<input type="hidden" name="id" value={{ $channel['id'] }}></button>

@@ -38,7 +38,7 @@ class ChannelController extends Controller {
 				[
 					'bar' => ['subscriberCount'],
 					'line' => ['viewCount'],
-					'pie' => ['viewCount', 'subscriberCount', 'commentCount'],
+					'pie' => ['viewCount', 'subscriberCount'],
 
 				]
 			);

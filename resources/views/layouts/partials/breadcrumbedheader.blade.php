@@ -1,14 +1,20 @@
 <div class="breadcrumb-header">
-    <div class="row">
+
 <div class="panel panel-white">
     <div class="panel-body">
-        <div class="panel-heading clearfix">
-            <h4 class="panel-title">Active channel {{ app('channel')->title }}</h4>
+        <div class="row-fluid">
+                    <div class="span6 pull-left">
+        <!-- <div class="panel-heading clearfix"> -->
+           <h4> Active Channel <strong> {{ app('channel')->title }}</strong></h4>
         </div>
-        <div class="panel-body">
-            <a title="Choisir un intervalle" data-toggle="modal" data-target="#dateModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-calendar"><span class="span">Period Filter</span></i></button></a>
-            <a title="Choisir une chaine" data-toggle="modal" data-target="#savedChannelModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-calendar"><span class="span"> Saved Channel Filter</span></i></button></a>
-        </div>
+         <div class="span6 text-right">
+        <!-- </div>
+        <div class="panel-body"> -->
+            <a title="Choisir une chaine" data-toggle="modal" data-target="#savedChannelModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-youtube-play"><span class="span"> Channel Filter</span></i></button></a>
+            <a title="Choisir un intervalle" data-toggle="modal" data-target="#dateModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-calendar"><span class="span"> Period Filter</span></i></button></a>
+        <!-- </div> -->
+         </div>
+     </div>
     </div>
 </div>
     <!-- date modal-->
@@ -58,21 +64,21 @@
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Channel
                         <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" role="menu">
                             @foreach($savedChannels as $channel)
                             <li>
-                                <button class="btn btn-success">{{ app('channel')->id == $channel['id'] ? 'Selected' : 'Select' }}<input type="hidden" name="id" value={{ $channel['id'] }}></button>
-                                <form action= "{{ url('/setaccount')}}" class = "form-inline" method="POST" data-toggle="validator">
+                                  <form action= "{{ url('/setaccount')}}" class = "form-inline" method="POST" data-toggle="validator">
                                     {{ csrf_field() }}
+
                                     <button class="btn btn-primary">
                                     <input type="hidden" name="id" value="{{ $channel['id'] }}">{{$channel['title']}}
                                     </button>
                                 </form>
+
                             </li>
                             @endforeach
                         </ul>
                     </div>
-                    {{-- <button class="btn btn-primary" type="submit" >Choisir</button> --}}
 
                 </div>
                 <div class="modal-footer">
@@ -81,5 +87,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

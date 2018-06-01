@@ -18,11 +18,6 @@ class HomeController extends Controller {
 
 	public function getURL(Request $request) {
 
-		Session::put('channel', Auth::user()->channels()->get());
-		Session::save();
-
-		//dd(app('since'), app('until'));
-
 		try {
 
 			$channeldata = Auth::user()->channels()->take(10)->get()->toArray();

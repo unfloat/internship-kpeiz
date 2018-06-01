@@ -35,14 +35,9 @@ class formController extends Controller {
 	//     return redirect()->back();
 	// }
 
+	//sets the active channel (session variable) to the selected channel in the dropdown menu
 	public function setAccount(Request $request) {
-		if (!$request->has('id')) {
-			dd('error');
-		}
-		//dd($request->all());
-
 		Session::put('channel_id', $request->id);
-		//Session::put('playlist', app('channel')->playlists()->first());
 		Session::save();
 
 		return redirect()->back();

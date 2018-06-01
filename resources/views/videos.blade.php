@@ -2,7 +2,7 @@
 @section('content')
 <div class="panel panel-white">
     <div class="panel-heading">
-        <h4 class="panel-title">{{ (app('playlist') != null) ? app('playlist')->title : 'All Playlists'}}</h4>
+        <h4 class="panel-title">Active Playlist <strong>{{ (app('playlist') != null) ? app('playlist')->title : 'All Playlists'}}</strong></h4>
     </div>
     <div class="panel-body">
              @include('layouts.partials.breadcrumbedplaylistheader')
@@ -18,7 +18,7 @@
             <table id="example3" class="display table" style="width: 100%; cellspacing: 0;">
                 <thead>
                     <tr>
-                        <th>Video Rank</th>
+
                         <th>Video Title</th>
                         <th>Published At</th>
                         <th>Vues</th>
@@ -31,8 +31,7 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>Video Rank</th>
-                        <th>Video Title</th>
+                                               <th>Video Title</th>
                         <th>Published At</th>
                         <th>Vues</th>
                         <th>Likes</th>
@@ -50,7 +49,7 @@
                     @foreach($videodata['videos'] as $video)
 
                     <tr>
-                        <th>{{$video['rank']}}</th>
+
                         <th>{{$video['title']}}</th>
                         <th>{{$video['published_at']}}</th>
                         <th>{{isset($video['metrics']['viewCount']) ? $video['metrics']['viewCount'] : 0}}</th>

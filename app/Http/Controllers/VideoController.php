@@ -21,23 +21,35 @@ class VideoController extends Controller {
 	}
 
 	public function getVideos() {
+
 		$since = app('since');
 		$until = app('until');
 		$savedPlaylists = app('savedPlaylists');
+		$playlist = app('playlist');
 
-		$videodata = app('channel')->load(
-			['videos' => function ($query) use ($since, $until) {
-				$query->whereBetween('videos.created_at', [$since, $until]);
-			}]
-		)->toArray();
+		if (isset($playlist)) {
 
-		$subscribersCount = $videodata['metrics']['subscriberCount'];
-		foreach ($videodata['videos'] as $key => $data) {
+			$videodata = app('playlist')->load(
+				['videos' => function ($query) use ($since, $until) {
+					$query->whereBetween('videos.created_at', [$since, $until]);
+				}]
+			)->toArray();
 
-			$rank = $this->videoStats->getRank($data['metrics'], $subscribersCount);
-
-			$videodata['videos'][$key]['rank'] = $rank;
+		} else {
+			$videodata = app('channel')->load(
+				['videos' => function ($query) use ($since, $until) {
+					$query->whereBetween('videos.created_at', [$since, $until]);
+				}]
+			)->toArray();
 		}
+
+		/*$subscribersCount = $videodata['metrics']['subscriberCount'];
+			foreach ($videodata['videos'] as $key => $data) {
+
+				$rank = $this->videoStats->getRank($data['metrics'], $subscribersCount);
+
+				$videodata['videos'][$key]['rank'] = $rank;
+		*/
 
 		return view('videos', compact('videodata', 'savedPlaylists'));
 
