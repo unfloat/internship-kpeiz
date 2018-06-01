@@ -18,10 +18,9 @@
                                     <i class="menu-icon  icon-show_chart"></i><span>Metriques</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{ url('channelmetrics')}}">Channel KPI</a></li>
-                                    <li><a href="{{ url('/playlists')}}">Playlists KPI</a></li>
+                                    <li><a href="{{ url('/channelmetrics')}}">Channel KPI</a></li>
+                                    <li><a href="{{ url('/playlists')}}">Playlists</a></li>
                                     <li><a href="{{ url('/videos')}}">Videos</a></li>
-                                    <li><a href="{{ url('/videometrics')}}">Videos KPI</a></li>
                                     <li><a href="{{ url('/channelactivities')}}">User Activities</a></li>
 
                                 </ul>

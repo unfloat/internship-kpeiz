@@ -42,7 +42,7 @@ class formController extends Controller {
 		//dd($request->all());
 
 		Session::put('channel_id', $request->id);
-		Session::put('playlist', app('channel')->playlists()->first());
+		//Session::put('playlist', app('channel')->playlists()->first());
 		Session::save();
 
 		return redirect()->back();

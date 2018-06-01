@@ -75,7 +75,7 @@ class YoutubePlaylistDAO {
 		//dd($data);
 
 		$thumbnail['label'] = 'thumbnail';
-		$thumbnail['value'] = $data->snippet->thumbnails->high->url;
+		$thumbnail['value'] = $data->snippet->thumbnails->default->url;
 		$thumbnail['type'] = 'string';
 		//$thumbnail['channel_id'] = $channelId;
 		$thumbnail['playlist_id'] = $playlistid;

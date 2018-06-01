@@ -2,9 +2,10 @@
 @section('content')
 <div class="panel panel-white">
     <div class="panel-heading">
-        <h4 class="panel-title">Selected Channels</h4>
+        <h4 class="panel-title">{{ (app('playlist') != null) ? app('playlist')->title : 'All Playlists'}}</h4>
     </div>
     <div class="panel-body">
+             @include('layouts.partials.breadcrumbedplaylistheader')
 
         @if(Session::has('msg'))
                   <div class="alert alert-{{  Session::get('msg')['type'] }} alert-dismissible" role="alert" style="margin-bottom:0;">
@@ -17,7 +18,7 @@
             <table id="example3" class="display table" style="width: 100%; cellspacing: 0;">
                 <thead>
                     <tr>
-
+                        <th>Video Rank</th>
                         <th>Video Title</th>
                         <th>Published At</th>
                         <th>Vues</th>
@@ -30,7 +31,7 @@
                 </thead>
                 <tfoot>
                     <tr>
-
+                        <th>Video Rank</th>
                         <th>Video Title</th>
                         <th>Published At</th>
                         <th>Vues</th>
@@ -49,12 +50,12 @@
                     @foreach($videodata['videos'] as $video)
 
                     <tr>
-
+                        <th>{{$video['rank']}}</th>
                         <th>{{$video['title']}}</th>
                         <th>{{$video['published_at']}}</th>
-                        <th>{{isset($video['metrics']['viewCount']) ? $video['metrics']['viewCount'] : 'unknown'}}</th>
-                        <th>{{isset($video['metrics']['likeCount']) ? $video['metrics']['likeCount'] : 'unknown'}}</th>
-                        <th>{{isset($video['metrics']['commentCount']) ? $video['metrics']['commentCount'] : 'unknown'}}</th>
+                        <th>{{isset($video['metrics']['viewCount']) ? $video['metrics']['viewCount'] : 0}}</th>
+                        <th>{{isset($video['metrics']['likeCount']) ? $video['metrics']['likeCount'] : 0}}</th>
+                        <th>{{isset($video['metrics']['commentCount']) ? $video['metrics']['commentCount'] : 0}}</th>
 
 
 

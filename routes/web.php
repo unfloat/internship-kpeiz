@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/playlists', 'PlaylistController@getPlaylists')->name('playlists');
 	Route::get('/channelmetrics', 'ChannelController@getMetrics')->name('channelmetrics');
 	Route::get('/videometrics/{id}', 'VideoController@getMetrics')->name('videometrics');
-	Route::get('/playlistmetrics', 'PlaylistController@getMetrics')->name('playlistmetrics');
+	Route::get('/playlistmetrics/{id}', 'PlaylistController@getMetrics')->name('playlistmetrics');
 	Route::get('/useractivities', 'ChannelActivitiesController@getMetrics')->name('useractivities');
 
 	// Route::get('/home', 'HomeController@test')->name('home');
@@ -43,5 +43,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/channel', 'HomeController@postChannel')->name('channelSave'); //here
 	Route::post('/datepick', 'formController@updateDate')->name('datePick');
 	Route::post('/setvideo', 'formController@setVideo')->name('setVideo');
+
 	// Route::post('/putPeriod', 'formController@putPeriod')->name('putPeriod');
 });

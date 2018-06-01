@@ -4,7 +4,7 @@
 
 <div class="panel panel-white">
     <div class="panel-heading">
-        <h4 class="panel-title">Selected Channels</h4>
+        <h4 class="panel-title">Playlists</h4>
     </div>
     <div class="panel-body">
 

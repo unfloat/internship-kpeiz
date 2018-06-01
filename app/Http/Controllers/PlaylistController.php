@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\ActiveMetrics;
 use App\Helpers\CreateChart;
 use App\Helpers\PlaylistStats;
+use Session;
 
 class PlaylistController extends Controller {
 	//
@@ -31,35 +32,41 @@ class PlaylistController extends Controller {
 		return view('playlists', compact('playlistsdata'));
 	}
 
-	public function getMetrics() {
+	public function getMetrics($id) {
 
-		//dd($since, $until);
+		$since = app('since');
+		$until = app('until');
+		$savedPlaylists = app('savedPlaylists');
 
-		$playlistsData = $this->activePlaylist->getActive('playlist', $since, $until);
+		Session::put('playlist_id', $id);
+		Session::save();
 
-		foreach ($playlistsData['playlists'] as $key => $value) {
-			//dd($value['data']);
+		try {
 
-			$playlists[$value['id']] = $value['title'];
+			//dd($since, $until);
+			$playlistsdata = app('channel')->load([
+				'playlists' => function ($query) use ($since, $until, $id) {
+					$query->where('playlists.id', $id)->whereBetween('playlists.created_at', [$since, $until]);},
 
-			$indicators[$value['id']] = $this->playlistStats->getBasicIndicators($value['metrics']);
+			]
+			)->toArray();
 
-			$infos[$value['id']] = $this->playlistStats->getBasicInfo($value['data']);
-			//$bestPlaylistVideos[] = Video::with(['videoMetrics'])->where(function ($query) use ($since, $until) {
-			/*
-				$query->orderBy('videoMetrics', 'asc');
-			})->where('playlist_id', $value['id'])->take(3)->get()->toArray();*/
+/*		$playlistsData = $this->activePlaylist->getActive('playlist', $since, $until);
 
-		}
+ */
 
-		/*} catch (\Exception $e) {
+		} catch (\Exception $e) {
 			Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data ']);
 			//dd(app('since'), app('until'));
-		}*/
+		}
 
-		//dd($playlists, $infos);
-
-		return view('metrics.playlistmetrics', compact('infos', 'playlists', 'indicators'));
+		return view('metrics.playlistmetrics', compact('playlistsdata', 'savedPlaylists'));
 	}
+}
 
+/*/
+
+}
+
+}
 }

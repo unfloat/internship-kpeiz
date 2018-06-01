@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider {
 
 		Schema::defaultStringLength(191);
 
-		view()->composer(['metrics.channelmetrics', 'metrics.playlistmetrics', 'metrics.videometrics', 'playlists'], function ($view) {
+		view()->composer(['metrics.channelmetrics', 'metrics.playlistmetrics', 'metrics.videometrics', 'playlists', 'videos'], function ($view) {
 
 			// $savedChannels = Channel::where('user_id', Auth::user()->id);
 			$savedChannels = Auth::user()->channels()->get()->toArray();
@@ -66,6 +66,34 @@ class AppServiceProvider extends ServiceProvider {
 			return Channel::find(Session::get('channel_id'));
 		});
 
+		$this->app->singleton('savedVideos', function ($app) {
+
+			if (!Session::has('savedVideos')) {
+
+				$data = app('channel')->load(
+					['videos']
+				)->toArray();
+				foreach ($data['videos'] as $key => $videodata) {
+					$savedVideos[$videodata['id']] = $videodata['title'];
+				}
+				return $savedVideos;
+			}
+		});
+
+		$this->app->singleton('savedPlaylists', function ($app) {
+
+			if (!Session::has('savedPlaylists')) {
+
+				$data = app('channel')->load(
+					['playlists']
+				)->toArray();
+				foreach ($data['playlists'] as $key => $playlistdata) {
+					$savedPlaylists[$playlistdata['id']] = $playlistdata['title'];
+				}
+				return $savedPlaylists;
+			}
+		});
+
 		$this->app->singleton('video', function ($app) {
 
 			$playlistID = Playlist::where('channel_id', Session::get('channel_id'))->get()->first();
@@ -80,9 +108,7 @@ class AppServiceProvider extends ServiceProvider {
 
 		$this->app->singleton('playlist', function ($app) {
 
-			if (!Session::has('playlist_id') && Auth::user()->channels()->playlists()->count()) {
-				return Playlist::where('channel_id', app('channel')->id)->first();
-			} elseif (!Session::has('playlist_id')) {
+			if (!Session::has('playlist_id')) {
 				return Playlist::where('channel_id', app('channel')->id)->first();
 			}
 
