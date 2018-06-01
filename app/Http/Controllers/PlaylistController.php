@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ActiveMetrics;
-use App\Helpers\CreateChart;
-use App\Helpers\PlaylistStats;
-use Session;
+use App\Helpers\VideoStats;
 
 class PlaylistController extends Controller {
 	//
-	protected $charts;
-	protected $playlistStats;
-	protected $activePlaylist;
 
-	public function __construct(CreateChart $charts, PlaylistStats $playlistStats, ActiveMetrics $activePlaylist) {
-		$this->charts = $charts;
-		$this->playlistStats = $playlistStats;
-		$this->activePlaylist = $activePlaylist;
+	protected $videoStats;
+
+	public function __construct(VideoStats $videoStats) {
+
+		$this->videoStats = $videoStats;
+
 	}
 	public function getPlaylists() {
 		$since = app('since');
@@ -25,43 +21,24 @@ class PlaylistController extends Controller {
 		$playlistsdata = app('channel')->load([
 			'playlists' => function ($query) use ($since, $until) {
 				$query->whereBetween('playlists.created_at', [$since, $until]);},
+			'videos' => function ($query) use ($since, $until) {
+				$query->whereBetween('videos.created_at', [$since, $until]);},
 
 		]
 		)->toArray();
 
+		$subscribersCount = $playlistsdata['metrics']['subscriberCount'];
+
+		foreach ($playlistsdata['videos'] as $key => $data) {
+
+			$rank = $this->videoStats->getRank($data['metrics'], $subscribersCount);
+
+			$playlistsdata['videos'][$key]['rank'] = $rank;
+		}
+
 		return view('playlists', compact('playlistsdata'));
 	}
 
-	public function getMetrics($id) {
-
-		$since = app('since');
-		$until = app('until');
-		$savedPlaylists = app('savedPlaylists');
-
-		Session::put('playlist_id', $id);
-		Session::save();
-
-		try {
-
-			//dd($since, $until);
-			$playlistsdata = app('channel')->load([
-				'playlists' => function ($query) use ($since, $until, $id) {
-					$query->where('playlists.id', $id)->whereBetween('playlists.created_at', [$since, $until]);},
-
-			]
-			)->toArray();
-
-/*		$playlistsData = $this->activePlaylist->getActive('playlist', $since, $until);
-
- */
-
-		} catch (\Exception $e) {
-			Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data ']);
-			//dd(app('since'), app('until'));
-		}
-
-		return view('metrics.playlistmetrics', compact('playlistsdata', 'savedPlaylists'));
-	}
 }
 
 /*/

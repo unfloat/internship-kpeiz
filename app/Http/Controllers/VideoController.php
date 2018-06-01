@@ -20,28 +20,45 @@ class VideoController extends Controller {
 		$this->activeVideo = $activeVideo;
 	}
 
-	public function getVideos() {
+	public function getVideos($id) {
 
 		$since = app('since');
 		$until = app('until');
 		$savedPlaylists = app('savedPlaylists');
-		$playlist = app('playlist');
 
-		if (isset($playlist)) {
+		/*if (isset($playlist)) {*/
 
-			$videodata = app('playlist')->load(
-				['videos' => function ($query) use ($since, $until) {
-					$query->whereBetween('videos.created_at', [$since, $until]);
-				}]
-			)->toArray();
+		try {
 
-		} else {
+			if (isset($id)) {
+				Session::put('playlist_id', $id);
+				Session::save();
+
+				$videodata = app('playlist')->load(
+					['videos' => function ($query) use ($since, $until) {
+						$query->whereBetween('videos.created_at', [$since, $until]);
+					}]
+				)->toArray();
+			} else {
+				$videodata = app('channel')->load(
+					['videos' => function ($query) use ($since, $until) {
+						$query->whereBetween('videos.created_at', [$since, $until]);
+					}]
+				)->toArray();
+			}
+
+		} catch (\Exception $e) {
+			Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data During this period ']);
+			/*return redirect()->back();*/
+		}
+
+		/*} else {
 			$videodata = app('channel')->load(
 				['videos' => function ($query) use ($since, $until) {
 					$query->whereBetween('videos.created_at', [$since, $until]);
 				}]
 			)->toArray();
-		}
+		}*/
 
 		/*$subscribersCount = $videodata['metrics']['subscriberCount'];
 			foreach ($videodata['videos'] as $key => $data) {
@@ -61,12 +78,16 @@ class VideoController extends Controller {
 		$until = app('until');
 		$savedVideos = app('savedVideos');
 
+		Session::put('video_id', $id);
+		Session::save();
+
 		$data = app('channel')->load(
 			[
 				'videos' => function ($query) use ($since, $until, $id) {
 					$query->where('videos.id', $id)->whereBetween('videos.created_at', [$since, $until]);
 				}]
 		)->toArray();
+
 		if ($data['videos'] == []) {
 			Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data During this period ']);
 		}
@@ -79,9 +100,9 @@ class VideoController extends Controller {
 			$finals[$videodata['id']] = $this->charts->getChart($videodata['video_metrics'],
 				[
 					'bar' => ['viewCount'],
-					'pie' => ['likeCount', 'dislikeCount'],
+					'pie' => ['likeCount', 'dislikeCount', 'commentCount'],
 
-					'line' => ['likeCount', 'dislikeCount'],
+					'line' => ['likeCount', 'viewCount'],
 
 				]);
 

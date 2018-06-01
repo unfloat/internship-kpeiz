@@ -44,7 +44,10 @@
                             <th>{{$playlist['title']}}</th>
                             <th>{{$playlist['published_at']}}</th>
                             <th>{{$playlist['metrics']['item_count']}}</th>
-                            <th><a href="{{ url('/playlistmetrics/'.$playlist['id']) }}" class="btn btn-xs btn-default">See metrics</a></th>
+
+                            <th>
+                                 <a href="{{ url('/videos/'.$playlist['id']) }}" class="btn btn-xs btn-default">See videos</a>
+                            </th>
                         </tr>
                         @endforeach
                         @endif

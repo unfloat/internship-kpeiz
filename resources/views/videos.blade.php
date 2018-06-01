@@ -2,10 +2,13 @@
 @section('content')
 <div class="panel panel-white">
     <div class="panel-heading">
-        <h4 class="panel-title">Active Playlist <strong>{{ (app('playlist') != null) ? app('playlist')->title : 'All Playlists'}}</strong></h4>
+       <!--  <h4 class="panel-title">Active Playlist <strong>{{ (app('playlist') != null) ? app('playlist')->title : 'All Playlists'}}</strong></h4> -->
     </div>
     <div class="panel-body">
-             @include('layouts.partials.breadcrumbedplaylistheader')
+
+            @include('layouts.partials.breadcrumbedplaylistheader')
+
+
 
         @if(Session::has('msg'))
                   <div class="alert alert-{{  Session::get('msg')['type'] }} alert-dismissible" role="alert" style="margin-bottom:0;">
@@ -63,8 +66,7 @@
                         <th>
 
                                 <!--  <button class="btn btn-success"><a href="{{ url('/videometrics')}}">Details</a></button> -->
-                                 <a href="{{ url('/videometrics/'.$video['id']) }}" class="btn btn-xs btn-default">
-                                    <i class="fa fa-pencil"></i></a>
+                                 <a href="{{ url('/videometrics/'.$video['id']) }}" class="btn btn-xs btn-default">See metrics</i></a>
 
 
 

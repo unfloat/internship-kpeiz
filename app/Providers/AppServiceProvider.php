@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider {
 
 			if (!Session::has('savedVideos')) {
 
-				$data = app('channel')->load(
+				$data = app('playlist')->load(
 					['videos']
 				)->toArray();
 				foreach ($data['videos'] as $key => $videodata) {

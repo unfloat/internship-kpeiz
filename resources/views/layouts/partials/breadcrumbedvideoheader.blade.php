@@ -35,7 +35,7 @@
 
                     <div class="col-sm-6">
 
-                        <label for="">Choisir un video</label><br>
+                        <label for="">Choisir une video parmi la playlist {{app('playlist')->title}}</label><br>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Video
                                 <span class="caret"></span></button>

@@ -44,10 +44,6 @@ class formController extends Controller {
 	}
 
 	public function setPlaylist(Request $request) {
-		if (!$request->has('id')) {
-			dd('error');
-		}
-		//dd($request->all());
 
 		Session::put('playlist_id', $request->id);
 		Session::save();
