@@ -10,7 +10,7 @@
   <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title -->
-  <title>Title</title>
+  <title>Kpeiz</title>
 
 
   <!-- Styles -->

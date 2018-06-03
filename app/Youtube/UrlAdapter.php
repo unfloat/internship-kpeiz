@@ -38,10 +38,9 @@ class UrlAdapter {
 
 		} else if (strpos($path, '/user') === 0) {
 			$segments = explode('/', $path);
-			$username = $segments[count($segments) - 1];
+			$channel = $segments[count($segments) - 1];
 			$type = 'user';
 
-			$channel = $username;
 		} else {
 			throw new \Exception('The supplied URL does not look like a Youtube Channel URL');
 		}

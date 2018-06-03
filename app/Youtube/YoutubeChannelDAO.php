@@ -28,8 +28,9 @@ class YoutubeChannelDAO {
 		}
 
 		$channelArray = self::convertToChannel(head($data->items), $user_id);
+		dd($channelArray);
 
-		$channel = Channel::firstOrCreate(
+		Channel::firstOrCreate(
 			['id' => $channelArray['id']],
 			$channelArray);
 

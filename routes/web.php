@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/playlistmetrics/{id}', 'PlaylistController@getMetrics')->name('playlistmetrics');
 	Route::get('/channelreports', 'ReportController@getReport')->name('channelreports');
 	Route::get('/downloadPDF', 'ReportController@downloadPDF')->name('downloadPDF');
+	Route::get('/contact', 'contactController@getContact')->name('contact');
 
 	// Route::get('/home', 'HomeController@test')->name('home');
 

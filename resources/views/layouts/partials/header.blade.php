@@ -25,7 +25,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+               <!--  <ul class="nav navbar-nav">
 
                     <li><a href="javascript:void(0)" id="collapsed-sidebar-toggle-button" ><i class="fa fa-bars"></i></a></li>
                     <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
@@ -33,7 +33,7 @@
 
 
 
-                </ul>
+                </ul> -->
 
                 <ul class="nav navbar-nav navbar-right">
                         <a title="Choisir un intervalle" data-toggle="modal" data-target="#dateModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-calendar"><span class="span"> Period Filter</span></i></button></a>

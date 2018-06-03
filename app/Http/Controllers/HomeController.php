@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Youtube\UrlAdapter;
 use App\Youtube\YoutubeAdapter;
-use Auth;
+use App\Youtube\YoutubeChannelDAO;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller {
 
@@ -20,9 +21,9 @@ class HomeController extends Controller {
 		try {
 
 			$channeldata = Auth::user()->channels()->take(10)->get()->toArray();
+
 		} catch (\Exception $e) {
 			Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data ']);
-			//dd(app('since'), app('until'));
 		}
 
 		return view('dashboard', compact('channeldata'));
@@ -34,15 +35,15 @@ class HomeController extends Controller {
 			$data = UrlAdapter::parseChannelFromURL($request->get('urlchannel'));
 			('channel' == $data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($data['channel']) : $channeldata = YoutubeAdapter::getUserChannel($data['channel']);
 
-			$this->dispatch(new FetchChannel($data, Auth::user()));
+			YoutubeChannelDAO::saveChannel($channeldata, Auth::user()->id);
+			/*$this->dispatch(new FetchChannel($data, Auth::user()));*/
+			Session::flash('msg', ['type' => 'success', 'text' => 'Data is being collected']);
 
 		} catch (\Exception $e) {
 			Session::flash('msg', ['type' => 'danger', 'text' => $e->getMessage()]);
-			return redirect()->back();
 		}
-		Session::flash('msg', ['type' => 'success', 'text' => 'Data is being collected']);
-
 		return redirect('home');
+
 	}
 
 	// public function test()
