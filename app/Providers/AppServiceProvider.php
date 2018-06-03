@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider {
 
 		Schema::defaultStringLength(191);
 
-		view()->composer(['metrics.channelmetrics', 'metrics.videometrics', 'playlists', 'videos'], function ($view) {
+		view()->composer(['metrics.channelmetrics', 'metrics.videometrics', 'playlists', 'videos', 'report'], function ($view) {
 
 			// $savedChannels = Channel::where('user_id', Auth::user()->id);
 			$savedChannels = Auth::user()->channels()->get()->toArray();

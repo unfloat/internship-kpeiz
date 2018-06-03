@@ -14,14 +14,12 @@ class FetchChannelCommand extends Command {
 	 * @var string
 	 */
 	protected $signature = 'channel:fetch';
-
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
 	protected $description = 'Processing channel data';
-
 	/**
 	 * Create a new command instance.
 	 *
@@ -30,7 +28,6 @@ class FetchChannelCommand extends Command {
 	public function __construct() {
 		parent::__construct();
 	}
-
 	/**
 	 * Execute the console command.
 	 *
@@ -43,14 +40,6 @@ class FetchChannelCommand extends Command {
 		foreach ($alreadySavedChannels as $key => $alreadySavedChannel) {
 			$channeldata[] = YoutubeAdapter::getChannelbyChannelId($alreadySavedChannel['id']);
 		}
-
-		//dd($channeldata);
-
 		YoutubeChannelDAO::saveChannels($channeldata, $alreadySavedChannel['user_id']);
-
-		// foreach ($channeldata as $data) {
-		//     dd($data);
-		//     YoutubeChannelDAO::saveChannel($data, $alreadySavedChannel['user_id']);
-		// }
 	}
 }

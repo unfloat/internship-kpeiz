@@ -32,7 +32,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/channelmetrics', 'ChannelController@getMetrics')->name('channelmetrics');
 	Route::get('/videometrics/{id}', 'VideoController@getMetrics')->name('videometrics');
 	Route::get('/playlistmetrics/{id}', 'PlaylistController@getMetrics')->name('playlistmetrics');
-	Route::get('/useractivities', 'ChannelActivitiesController@getMetrics')->name('useractivities');
+	Route::get('/channelreports', 'ChannelActivitiesController@getReport')->name('channelreports');
+	Route::get('/downloadPDF', 'ChannelActivitiesController@downloadPDF')->name('downloadPDF');
 
 	// Route::get('/home', 'HomeController@test')->name('home');
 
