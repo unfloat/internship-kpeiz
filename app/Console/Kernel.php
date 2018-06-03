@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule) {
 		$schedule->command(FetchChannelCommand::class)
-			->dailyAt('10:00');
+			->dailyAt('02:56');
 	}
 
 	/**

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ActiveMetrics;
 use App\Helpers\CreateChart;
 use App\Helpers\VideoStats;
 use Session;
@@ -14,10 +13,10 @@ class VideoController extends Controller {
 	protected $videoStats;
 	protected $activeVideo;
 
-	public function __construct(CreateChart $charts, VideoStats $videoStats, ActiveMetrics $activeVideo) {
+	public function __construct(CreateChart $charts, VideoStats $videoStats) {
 		$this->charts = $charts;
 		$this->videoStats = $videoStats;
-		$this->activeVideo = $activeVideo;
+
 	}
 
 	public function getVideos($id = null) {
@@ -25,8 +24,6 @@ class VideoController extends Controller {
 		$since = app('since');
 		$until = app('until');
 		$savedPlaylists = app('savedPlaylists');
-
-		/*if (isset($playlist)) {*/
 
 		try {
 
@@ -49,24 +46,7 @@ class VideoController extends Controller {
 
 		} catch (\Exception $e) {
 			Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data During this period ']);
-			/*return redirect()->back();*/
 		}
-
-		/*} else {
-			$videodata = app('channel')->load(
-				['videos' => function ($query) use ($since, $until) {
-					$query->whereBetween('videos.created_at', [$since, $until]);
-				}]
-			)->toArray();
-		}*/
-
-		/*$subscribersCount = $videodata['metrics']['subscriberCount'];
-			foreach ($videodata['videos'] as $key => $data) {
-
-				$rank = $this->videoStats->getRank($data['metrics'], $subscribersCount);
-
-				$videodata['videos'][$key]['rank'] = $rank;
-		*/
 
 		return view('videos', compact('videodata', 'savedPlaylists'));
 
@@ -81,38 +61,38 @@ class VideoController extends Controller {
 		Session::put('video_id', $id);
 		Session::save();
 
-		$data = app('channel')->load(
-			[
-				'videos' => function ($query) use ($since, $until, $id) {
-					$query->where('videos.id', $id)->whereBetween('videos.created_at', [$since, $until]);
-				}]
-		)->toArray();
+		try {
 
-		if ($data['videos'] == []) {
-			Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data During this period ']);
-		}
-
-		/*dd($data);*/
-
-		foreach ($data['videos'] as $key => $videodata) {
-			$videos[$videodata['title']] = $videodata['data']['thumbnail'];
-
-			$finals[$videodata['id']] = $this->charts->getChart($videodata['video_metrics'],
+			$data = app('channel')->load(
 				[
-					'bar' => ['viewCount'],
-					'pie' => ['likeCount', 'dislikeCount', 'commentCount'],
+					'videos' => function ($query) use ($since, $until, $id) {
+						$query->where('videos.id', $id)->whereBetween('videos.created_at', [$since, $until]);
+					}]
+			)->toArray();
 
-					'line' => ['likeCount', 'viewCount'],
+			if ($data['videos'] == []) {
+				Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data During this period ']);
+			}
 
-				]);
+			foreach ($data['videos'] as $key => $videodata) {
+				$videos[$videodata['title']] = $videodata['data']['thumbnail'];
 
-			$indicators[$videodata['title']] = $this->videoStats->getBasicIndicators($videodata['video_metrics']);
+				$finals[$videodata['id']] = $this->charts->getChart($videodata['video_metrics'],
+					[
+						'bar' => ['viewCount'],
+						'pie' => ['likeCount', 'dislikeCount', 'commentCount'],
+
+						'line' => ['likeCount', 'viewCount'],
+
+					]);
+
+				$indicators[$videodata['title']] = $this->videoStats->getBasicIndicators($videodata['video_metrics']);
+			}
+
+		} catch (\Exception $e) {
+			Session::flash('msg', ['type' => 'danger', 'text' => $e->getMessage()]);
+			return redirect()->back();
 		}
-
-		// } catch (\Exception $e) {
-		//     Session::flash('msg', ['type' => 'danger', 'text' => $e->getMessage()]);
-		//     return redirect()->back();
-		// }
 
 		return view('metrics.videometrics', compact('finals', 'videos', 'indicators', 'savedVideos'));
 	}

@@ -3,7 +3,7 @@
 
 <div class="row">
 	<button class="btn btn-primary">
-	<a href="{{ url('/downloadPDF')}}">download</a>
+	<a href="{{ route('downloadPDF',['download'=>'pdf']) }}">Download PDF</a>
 	</button>
 </div>
 

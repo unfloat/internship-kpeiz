@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Jobs\FetchChannel;
 use App\User;
 use App\Youtube\UrlAdapter;
+use App\Youtube\YoutubeAdapter;
 use Auth;
 use Illuminate\Http\Request;
 use Session;
@@ -32,19 +32,16 @@ class HomeController extends Controller {
 
 		try {
 			$data = UrlAdapter::parseChannelFromURL($request->get('urlchannel'));
+			('channel' == $data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($data['channel']) : $channeldata = YoutubeAdapter::getUserChannel($data['channel']);
+
+			$this->dispatch(new FetchChannel($data, Auth::user()));
+
 		} catch (\Exception $e) {
 			Session::flash('msg', ['type' => 'danger', 'text' => $e->getMessage()]);
 			return redirect()->back();
 		}
-
-		/*('channel' == $data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($data['channel']) : $channeldata = YoutubeAdapter::getUserChannel($data['channel']);*/
-		//dd($channeldata);
-
-		/*dd($data);*/
-
-		$this->dispatch(new FetchChannel($data, Auth::user()));
-
 		Session::flash('msg', ['type' => 'success', 'text' => 'Data is being collected']);
+
 		return redirect('home');
 	}
 

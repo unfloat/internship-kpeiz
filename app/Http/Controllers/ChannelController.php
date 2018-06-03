@@ -15,13 +15,17 @@ class ChannelController extends Controller {
 		$this->channelStats = $channelStats;
 	}
 
-	public function getMetrics() {
+	public function getMetrics($id = null) {
 
 		/*dd(app('since'), app('until'));*/
 
-		$id = (app('channel')->id);
 		$since = app('since');
 		$until = app('until');
+
+		if (isset($id)) {
+			Session::put('channel_id', $id);
+			Session::save();
+		}
 
 		$data = app('channel')->load([
 			'channelMetric' => function ($query) use ($since, $until) {

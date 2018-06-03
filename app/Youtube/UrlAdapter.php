@@ -2,123 +2,114 @@
 
 namespace App\Youtube;
 
-class UrlAdapter
-{
+class UrlAdapter {
 
-    public static function parseVideoFromURL($youtube_url)
-    {
-        if (strpos($youtube_url, 'youtube.com')) {
-            if (strpos($youtube_url, 'embed')) {
-                $path = static::_parse_url_path($youtube_url);
-                $vid  = substr($path, 7);
-                //dd('youtube.com');
-                return $vid;
-            } else {
-                $params = static::_parse_url_query($youtube_url);
-                return $params['v'];
-            }
-        } else if (strpos($youtube_url, 'youtu.be')) {
-            $path = static::_parse_url_path($youtube_url);
-            $vid  = substr($path, 1);
-            return $vid;
-        } else {
-            throw new \Exception('The supplied URL does not look like a Youtube Video URL');
-        }
-        //dd($vid);
-    }
+	public static function parseVideoFromURL($youtube_url) {
+		if (strpos($youtube_url, 'youtube.com')) {
+			if (strpos($youtube_url, 'embed')) {
+				$path = static::_parse_url_path($youtube_url);
+				$vid = substr($path, 7);
+				//dd('youtube.com');
+				return $vid;
+			} else {
+				$params = static::_parse_url_query($youtube_url);
+				return $params['v'];
+			}
+		} else if (strpos($youtube_url, 'youtu.be')) {
+			$path = static::_parse_url_path($youtube_url);
+			$vid = substr($path, 1);
+			return $vid;
+		} else {
+			throw new \Exception('The supplied URL does not look like a Youtube Video URL');
+		}
+		//dd($vid);
+	}
 
-    public static function parseChannelFromURL($youtube_url)
-    {
-        if (strpos($youtube_url, 'youtube.com') === false) {
-            throw new \Exception('The supplied URL does not look like a Youtube URL ');
-        }
+	public static function parseChannelFromURL($youtube_url) {
+		if (strpos($youtube_url, 'youtube.com') === false) {
+			throw new \Exception('The supplied URL does not look like a Youtube URL ');
+		}
 
-        $path = static::_parse_url_path($youtube_url);
-        if (strpos($path, '/channel') === 0) {
-            $segments = explode('/', $path);
-            $type     = 'channel';
-            $channel  = $segments[count($segments) - 1];
-            //dd($channelId);
-            //$channel = $this->getChannelById($channelId);
-        } else if (strpos($path, '/user') === 0) {
-            $segments = explode('/', $path);
-            $username = $segments[count($segments) - 1];
-            $type     = 'user';
-            //$channel = $this->getChannelByName($username);
-            $channel = $username;
-        } else {
-            throw new \Exception('The supplied URL does not look like a Youtube Channel URL');
-        }
+		$path = static::_parse_url_path($youtube_url);
+		if (strpos($path, '/channel') === 0) {
+			$segments = explode('/', $path);
+			$type = 'channel';
+			$channel = $segments[count($segments) - 1];
 
-        return compact('channel','type');
-    }
+		} else if (strpos($path, '/user') === 0) {
+			$segments = explode('/', $path);
+			$username = $segments[count($segments) - 1];
+			$type = 'user';
 
-    // /https://www.youtube.com/playlist?list=FLgpFXuIkwqiX8GePIGCl2oQ
+			$channel = $username;
+		} else {
+			throw new \Exception('The supplied URL does not look like a Youtube Channel URL');
+		}
 
-    public static function parsePlaylistFromURL($youtube_url)
-    {
-        if (strpos($youtube_url, 'youtube.com') === false) {
-            throw new \Exception('The supplied URL does not look like a Youtube URL');
-            //testing if valid youtube url
-        }
-        $path = static::_parse_url_path($youtube_url);
-        //retrieve complete url
-        //dd($path);
-        $listpath = parse_url($youtube_url, PHP_URL_QUERY);
-        //retrieve playlist url
-        //dd($listpath);
+		return compact('channel', 'type');
+	}
 
-        if (strpos($listpath, 'list') === 0) {
-            $segments = explode('=', $listpath);
-            //retrieve playlist id
-            //dd($segments);
-            $type = 'playlist';
-            //indicate url type (playlist)
-            $playlistID = $segments[count($segments) - 1];
-            //dd($playlistID);
-        } else if ((strpos($path, '/channel') === 0) || (strpos($path, '/user') === 0)) {
-            //if the user indicates a non playlist url
-            $playlistData = self::parseChannelFromURL($youtube_url);
-            $playlistID   = $playlistData['channel'];
-            $type         = $playlistData['type'];
-            //indicate url type (channel || user)
-        } else {
-            throw new \Exception('The supplied URL does not look like a Youtube Playlist URL');
-        }
+	public static function parsePlaylistFromURL($youtube_url) {
+		if (strpos($youtube_url, 'youtube.com') === false) {
+			throw new \Exception('The supplied URL does not look like a Youtube URL');
+			//testing if valid youtube url
+		}
+		$path = static::_parse_url_path($youtube_url);
+		//retrieve complete url
+		//dd($path);
+		$listpath = parse_url($youtube_url, PHP_URL_QUERY);
+		//retrieve playlist url
+		//dd($listpath);
 
-        return compact('playlistID', 'type');
-    }
+		if (strpos($listpath, 'list') === 0) {
+			$segments = explode('=', $listpath);
+			//retrieve playlist id
+			//dd($segments);
+			$type = 'playlist';
+			//indicate url type (playlist)
+			$playlistID = $segments[count($segments) - 1];
+			//dd($playlistID);
+		} else if ((strpos($path, '/channel') === 0) || (strpos($path, '/user') === 0)) {
+			//if the user indicates a non playlist url
+			$playlistData = self::parseChannelFromURL($youtube_url);
+			$playlistID = $playlistData['channel'];
+			$type = $playlistData['type'];
+			//indicate url type (channel || user)
+		} else {
+			throw new \Exception('The supplied URL does not look like a Youtube Playlist URL');
+		}
 
-    public static function _parse_url_query($url)
-    {
-        $array = parse_url($url);
-        $query = $array['query'];
+		return compact('playlistID', 'type');
+	}
 
-        $queryParts = explode('&', $query);
+	public static function _parse_url_query($url) {
+		$array = parse_url($url);
+		$query = $array['query'];
 
-        $params = [];
-        foreach ($queryParts as $param) {
-            $item             = explode('=', $param);
-            $params[$item[0]] = empty($item[1]) ? '' : $item[1];
-        }
+		$queryParts = explode('&', $query);
 
-        return $params;
-    }
+		$params = [];
+		foreach ($queryParts as $param) {
+			$item = explode('=', $param);
+			$params[$item[0]] = empty($item[1]) ? '' : $item[1];
+		}
 
-    public static function _parse_url_path($url)
-    {
-        $array = parse_url($url);
+		return $params;
+	}
 
-        return $array['path'];
-    }
+	public static function _parse_url_path($url) {
+		$array = parse_url($url);
 
-    // GETTING VIDEO OR CHANNEL ID FROM USER URL
+		return $array['path'];
+	}
 
-    /**
-     * Get the channel object by supplying the URL of the channel page
-     *
-     * @param  string $youtube_url
-     * @throws \Exception
-     * @return object Channel object
-     */
+	// GETTING VIDEO OR CHANNEL ID FROM USER URL
+
+	/**
+	 * Get the channel object by supplying the URL of the channel page
+	 *
+	 * @param  string $youtube_url
+	 * @throws \Exception
+	 * @return object Channel object
+	 */
 }

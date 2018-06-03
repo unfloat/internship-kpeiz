@@ -14,16 +14,7 @@ class YoutubeChannelDAO {
 		//
 	}
 
-	// public static function saveChannels($data)
-	// {
-	//     //dd(Carbon::now()->toDateString());
-	//     foreach ($info->statistics as $key => $value)
-
-	// }
-
 	public static function saveChannels($data, $user_id) {
-
-		// dd($data);
 
 		foreach ($data as $key => $channel) {
 			self::saveChannel($channel, $user_id);
@@ -49,10 +40,6 @@ class YoutubeChannelDAO {
 		});
 
 		$channelMetric = self::convertToChannelMetric(head($data->items), $channelArray['id']);
-		//dd($channelMetric);
-		// $channelMetric->each(function ($metric) {
-		//     ChannelMetric::updateOrCreate(['label' => $metric['label'], 'channel_id' => $metric['channel_id'], 'date' => Carbon::now()->toDatestring()], $metric);
-		// });
 
 		$channelMetric->each(function ($metric) {
 			ChannelMetric::firstOrCreate(
@@ -73,21 +60,19 @@ class YoutubeChannelDAO {
 
 		if (isset($channelArray['uploads'])) {
 			$uploadedVideos = YoutubeAdapter::getVideosByPlaylistId($channelArray['uploads']);
-			//dd($uploadedVideos->items);
+
 			foreach ($uploadedVideos->items as $uploadedVideo) {
 				$id = $uploadedVideo->contentDetails->videoId;
 				$data = YoutubeAdapter::getVideobyVideoId($id);
-				// dd($data);
+
 				YoutubeVideoDAO::saveVideos($data, $channelArray['uploads'], $channelArray['title']);
 			}
 		}
-		//dd($data);
 
 		return true;
-		// return view('dashboard');
+
 	}
 
-// public static function convertToChannel($data, $type,$user_id)
 	public static function convertToChannel($data, $user_id) {
 
 		$channel = [];

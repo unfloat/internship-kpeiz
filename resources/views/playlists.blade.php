@@ -2,7 +2,6 @@
 @section('content')
 <div class="col-md-12">
     @include('layouts.partials.breadcrumbedheader')
-
 </div>
 <div class="col-md-12">
     @if(Session::has('msg'))
@@ -44,9 +43,8 @@
                             <th>{{$playlist['title']}}</th>
                             <th>{{$playlist['published_at']}}</th>
                             <th>{{$playlist['metrics']['item_count']}}</th>
-
                             <th>
-                                 <a href="{{ url('/videos/'.$playlist['id']) }}" class="btn btn-xs btn-default">See videos</a>
+                                <a href="{{ url('/videos/'.$playlist['id']) }}" class="btn btn-xs btn-default">See videos</a>
                             </th>
                         </tr>
                         @endforeach

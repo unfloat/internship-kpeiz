@@ -18,22 +18,29 @@ class PlaylistController extends Controller {
 		$since = app('since');
 		$until = app('until');
 
-		$playlistsdata = app('channel')->load([
-			'playlists' => function ($query) use ($since, $until) {
-				$query->whereBetween('playlists.created_at', [$since, $until]);},
-			'videos' => function ($query) use ($since, $until) {
-				$query->whereBetween('videos.created_at', [$since, $until]);},
+		try {
 
-		]
-		)->toArray();
+			$playlistsdata = app('channel')->load([
+				'playlists' => function ($query) use ($since, $until) {
+					$query->whereBetween('playlists.created_at', [$since, $until]);},
+				'videos' => function ($query) use ($since, $until) {
+					$query->whereBetween('videos.created_at', [$since, $until]);},
 
-		$subscribersCount = $playlistsdata['metrics']['subscriberCount'];
+			]
+			)->toArray();
 
-		foreach ($playlistsdata['videos'] as $key => $data) {
+			$subscribersCount = $playlistsdata['metrics']['subscriberCount'];
 
-			$rank = $this->videoStats->getRank($data['metrics'], $subscribersCount);
+			foreach ($playlistsdata['videos'] as $key => $data) {
 
-			$playlistsdata['videos'][$key]['rank'] = $rank;
+				$rank = $this->videoStats->getRank($data['metrics'], $subscribersCount);
+
+				$playlistsdata['videos'][$key]['rank'] = $rank;
+			}
+
+		} catch (\Exception $e) {
+			Session::flash('msg', ['type' => 'danger', 'text' => $e->getMessage()]);
+			return redirect()->back();
 		}
 
 		return view('playlists', compact('playlistsdata'));
