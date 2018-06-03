@@ -5,7 +5,6 @@ use App\Jobs\FetchChannel;
 use App\User;
 use App\Youtube\UrlAdapter;
 use Auth;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Session;
 
@@ -38,15 +37,12 @@ class HomeController extends Controller {
 			return redirect()->back();
 		}
 
-		/*('channel' == $data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($data['channel']) : $channeldata = YoutubeAdapter::getUserChannel($data['channel']);
-			//dd($channeldata);
-		*/
+		/*('channel' == $data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($data['channel']) : $channeldata = YoutubeAdapter::getUserChannel($data['channel']);*/
+		//dd($channeldata);
 
-		//dd($data);
+		/*dd($data);*/
 
-		$job = (new FetchChannel($data, Auth::user()))->delay(Carbon::now()->addSeconds(5));
-
-		$this->dispatch($job);
+		$this->dispatch(new FetchChannel($data, Auth::user()));
 
 		Session::flash('msg', ['type' => 'success', 'text' => 'Data is being collected']);
 		return redirect('home');

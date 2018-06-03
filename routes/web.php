@@ -26,7 +26,6 @@ Route::middleware(['auth'])->group(function () {
 
 	//GET METHODS
 	Route::get('/home', 'HomeController@getURL')->name('home');
-	Route::get('/videos', 'VideoController@getVideos')->name('videos');
 	Route::get('/videos/{id?}', 'VideoController@getVideos')->name('videos');
 	Route::get('/playlists', 'PlaylistController@getPlaylists')->name('playlists');
 	Route::get('/channelmetrics', 'ChannelController@getMetrics')->name('channelmetrics');

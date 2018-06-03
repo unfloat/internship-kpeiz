@@ -36,8 +36,6 @@ class YoutubeChannelDAO {
 			dd('no items');
 		}
 
-		dd($data);
-
 		$channelArray = self::convertToChannel(head($data->items), $user_id);
 
 		$channel = Channel::firstOrCreate(

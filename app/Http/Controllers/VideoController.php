@@ -20,7 +20,7 @@ class VideoController extends Controller {
 		$this->activeVideo = $activeVideo;
 	}
 
-	public function getVideos($id) {
+	public function getVideos($id = null) {
 
 		$since = app('since');
 		$until = app('until');
