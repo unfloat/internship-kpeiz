@@ -27,7 +27,7 @@
                         </li>
                         <li class="menu-divider"></li>
                         <li>
-                            <a href="{{ url('/contact')}}">
+                            <a href="{{ url('/mail')}}">
                                 <i class="menu-icon fa fa-at"></i><span>Contact</span>
                             </a>
                         </li>

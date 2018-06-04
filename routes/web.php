@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/playlistmetrics/{id}', 'PlaylistController@getMetrics')->name('playlistmetrics');
 	Route::get('/channelreports', 'ReportController@getReport')->name('channelreports');
 	Route::get('/downloadPDF', 'ReportController@downloadPDF')->name('downloadPDF');
-	Route::get('/contact', 'contactController@getContact')->name('contact');
+	Route::get('/mail', 'ContactController@mail')->name('mail');
 
 	// Route::get('/home', 'HomeController@test')->name('home');
 
@@ -45,6 +45,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/channel', 'HomeController@postChannel')->name('channelSave'); //here
 	Route::post('/datepick', 'formController@updateDate')->name('datePick');
 	Route::post('/setvideo', 'formController@setVideo')->name('setVideo');
+	Route::post('/sendmessage', 'contactController@sendMessage')->name('sendmessage');
+	Route::post('/send', 'ContactController@send')->name('send');
 
 	// Route::post('/putPeriod', 'formController@putPeriod')->name('putPeriod');
 });

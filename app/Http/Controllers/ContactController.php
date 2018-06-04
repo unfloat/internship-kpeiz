@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact;
+use Illuminate\Support\Facades\Mail;
+
 class ContactController extends Controller {
-	//
-	public function getContact() {
-		return view('contact');
+
+	public function send() {
+		Mail::send(new Contact());
 	}
 
-	public function sendMessage() {
+	public function mail() {
 		return view('contact');
 	}
-
 }

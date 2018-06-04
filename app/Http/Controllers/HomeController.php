@@ -3,8 +3,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Youtube\UrlAdapter;
-use App\Youtube\YoutubeAdapter;
-use App\Youtube\YoutubeChannelDAO;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -33,10 +31,8 @@ class HomeController extends Controller {
 
 		try {
 			$data = UrlAdapter::parseChannelFromURL($request->get('urlchannel'));
-			('channel' == $data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($data['channel']) : $channeldata = YoutubeAdapter::getUserChannel($data['channel']);
 
-			YoutubeChannelDAO::saveChannel($channeldata, Auth::user()->id);
-			/*$this->dispatch(new FetchChannel($data, Auth::user()));*/
+			$this->dispatch(new FetchChannel($data, Auth::user()));
 			Session::flash('msg', ['type' => 'success', 'text' => 'Data is being collected']);
 
 		} catch (\Exception $e) {

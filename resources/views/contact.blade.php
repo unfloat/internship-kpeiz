@@ -1,31 +1,19 @@
-@extends('layouts.main')
-@section('css')
-@endsection
-@section('content')
-<div class="panel panel-white">
-    <div class="panel-heading clearfix">
-        <h4 class="panel-title">Contact Us</h4>
-    </div>
-    <div class="panel-body">
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label for="input-Default" class="col-sm-2 control-label">FULL NAME</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="input-Default">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="input-Default" class="col-sm-2 control-label">Phone</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="input-Default">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="input-Default" class="col-sm-2 control-label">Message</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="input-Default">
-                </div>
-            </div>
-        </form>
-    </div></div>
-    @endsection
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<br>
+<form action="send" method="post">
+    {{csrf_field()}}
+    to : <input type="text" name="to">
+    message: <textarea type="text" name="message"> </textarea>
+    <input type="submit" value="Send">
+</form>
+</body>
+</html>
