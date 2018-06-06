@@ -85,6 +85,19 @@ class AppServiceProvider extends ServiceProvider {
 			$data = app('channel')->load(
 				['playlists']
 			)->toArray();
+
+			if ($data == []) {
+				$data = app('channel')->load(
+					['uploads']
+				)->toArray();
+
+				foreach ($data['playlists'] as $key => $playlistdata) {
+					$savedPlaylists[$playlistdata['id']] = $playlistdata['title'];
+				}
+				return $savedPlaylists;
+
+			}
+
 			foreach ($data['playlists'] as $key => $playlistdata) {
 				$savedPlaylists[$playlistdata['id']] = $playlistdata['title'];
 			}

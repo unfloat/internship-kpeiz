@@ -2,7 +2,7 @@
 return [
 	'driver' => env('MAIL_DRIVER', 'smtp'),
 	'host' => env('MAIL_HOST', 'smtp.gmail.com'),
-	'port' => env('MAIL_PORT', 587),
+	'port' => env('MAIL_PORT', 465),
 	'from' => ['address' => 'olphazarrouk@gmail.com', 'name' => 'Olfa'],
 	'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 	'username' => env('MAIL_USERNAME'),

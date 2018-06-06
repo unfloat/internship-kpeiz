@@ -12,7 +12,7 @@
  */
 
 Route::get('/', 'HomeController@index');
-Route::get('login', 'LoginController@index');
+Route::get('login', 'Auth\LoginController@index');
 
 Route::prefix('auth')->namespace('Auth')->group(function () {
 	Route::get('google', 'LoginController@redirectToProvider')->name('login');
@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/channel', 'HomeController@postChannel')->name('channelSave'); //here
 	Route::post('/datepick', 'formController@updateDate')->name('datePick');
 	Route::post('/setvideo', 'formController@setVideo')->name('setVideo');
-	Route::post('/sendmessage', 'contactController@sendMessage')->name('sendmessage');
+
 	Route::post('/send', 'ContactController@send')->name('send');
 
 	// Route::post('/putPeriod', 'formController@putPeriod')->name('putPeriod');

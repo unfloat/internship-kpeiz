@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\User;
-use App\Youtube\YoutubeAdapter;
 use App\Youtube\YoutubeChannelDAO;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,9 +32,7 @@ class FetchChannel implements ShouldQueue {
 	 */
 	public function handle() {
 
-		('channel' == $this->data['type']) ? $channeldata = YoutubeAdapter::getChannelbyChannelId($this->data['channel']) :
-		$channeldata = YoutubeAdapter::getUserChannel($this->data['channel']);
-		YoutubeChannelDAO::saveChannel($channeldata, $this->user->id);
+		YoutubeChannelDAO::saveChannel($this->data, $this->user->id);
 
 	}
 }

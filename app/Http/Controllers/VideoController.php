@@ -24,8 +24,13 @@ class VideoController extends Controller {
 		$since = app('since');
 		$until = app('until');
 		$savedPlaylists = app('savedPlaylists');
+		dd($savedPlaylists);
 
 		try {
+			if ($savedPlaylists == []) {
+				return view('videos', compact('videodata'));
+
+			}
 
 			if (isset($id)) {
 				Session::put('playlist_id', $id);

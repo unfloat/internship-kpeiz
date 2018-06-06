@@ -31,7 +31,10 @@
                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Playlist
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu">
+                            @if (isset($savedPlaylists))
+
                             @foreach($savedPlaylists as $id => $title)
+
                             <li>
                                 {{ csrf_field() }}
                                 <a class="btn" href="{{ url('/videos/'.$id)}}">
@@ -46,6 +49,7 @@
                                 </form> -->
                             </li>
                             @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>
