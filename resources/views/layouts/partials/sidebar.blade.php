@@ -17,21 +17,24 @@
                     <ul class="sub-menu">
                         <li><a href="{{ url('/channelmetrics')}}">Channel's Metrics</a></li>
                         <li><a href="{{ url('/playlists')}}">Playlists</a></li>
-                        <li><a href="{{ url('/videos')}}">Videos</a></li>                    </ul>
-                    </li>
-                    {{-- <li class="active-page"> --}}
-                        <li>
-                            <a href="{{ url('/channelreports')}}">
-                                <i class="menu-icon fa fa-file-text-o"></i><span>Rapports</span>
-                            </a>
-                        </li>
-                        <li class="menu-divider"></li>
-                        <li>
-                            <a href="{{ url('/mail')}}">
-                                <i class="menu-icon fa fa-at"></i><span>Contact</span>
-                            </a>
-                        </li>
+                        <!-- <li><a href="{{ url('/videos')}}">Videos</a></li> -->
+
+                        <li><a href="{{ url('/spacevideos')}}">Videos</a></li>
                     </ul>
-                </div>
+                </li>
+                {{-- <li class="active-page"> --}}
+                    <li>
+                        <a href="{{ url('/channelreports')}}">
+                            <i class="menu-icon fa fa-file-text-o"></i><span>Rapports</span>
+                        </a>
+                    </li>
+                    <li class="menu-divider"></li>
+                    <li>
+                        <a href="{{ url('/mail')}}">
+                            <i class="menu-icon fa fa-at"></i><span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </div>

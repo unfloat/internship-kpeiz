@@ -35,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/downloadPDF', 'ReportController@downloadPDF')->name('downloadPDF');
 	Route::get('/mail', 'ContactController@mail')->name('mail');
 
+	Route::get('/spacevideos/{id?}', 'testSpaceController@getVideos')->name('videos');
+	Route::get('/spacevideometrics/{id?}', 'testSpaceController@getMetrics')->name('videometrics');
+
 	// Route::get('/home', 'HomeController@test')->name('home');
 
 	// POST METHODS

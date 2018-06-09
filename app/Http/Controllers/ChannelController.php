@@ -21,28 +21,31 @@ class ChannelController extends Controller {
 
 		$since = app('since');
 		$until = app('until');
-
-		if (isset($id)) {
-			Session::put('channel_id', $id);
-			Session::save();
-		}
-
-		$data = app('channel')->load([
-			'channelMetric' => function ($query) use ($since, $until) {
-				$query->whereBetween('channel_metric.created_at', [$since, $until]);},
-			'channelData' => function ($query) use ($since, $until) {
-				$query->whereBetween('channel_data.created_at', [$since, $until]);},
-
-		]
-		)->toArray();
-
 		try {
+			if (isset($id)) {
+				Session::put('channel_id', $id);
+				Session::save();
+
+				$data = app('channel')->load([
+					'channelMetric' => function ($query) use ($since, $until) {
+						$query->whereBetween('channel_metric.created_at', [$since, $until]);},
+					'channelData',
+				]
+				)->toArray();
+			} else {
+				$data = app('channel')->load([
+					'channelMetric' => function ($query) use ($since, $until) {
+						$query->whereBetween('channel_metric.created_at', [$since, $until]);},
+					'channelData',
+				]
+				)->toArray();
+			}
 
 			$finals[$data['title']] = $this->charts->getChart($data['channel_metric'],
 				[
 					'bar' => ['subscriberCount'],
-					'line' => ['viewCount'],
 					'pie' => ['viewCount', 'subscriberCount'],
+					'line' => ['viewCount'],
 
 				]
 			);

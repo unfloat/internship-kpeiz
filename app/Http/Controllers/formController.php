@@ -8,6 +8,8 @@ class formController extends Controller {
 	public function updateDate(Request $request) {
 		Session::put('since', $request->start_date);
 		Session::put('until', $request->end_date);
+		Session::flash('msg', ['type' => 'success', 'text' => 'Periode fixée']);
+
 		Session::save();
 		return redirect()->back();
 	}

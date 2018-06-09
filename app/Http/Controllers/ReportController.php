@@ -12,7 +12,7 @@ class ReportController extends Controller {
 		$this->charts = $charts;
 		$this->channelStats = $channelStats;
 	}
-	public function getReport() {
+	public function getReport(Request $request, $invoiceId) {
 		$channel = app('channel');
 		return view('report', compact('channel'));
 	}
@@ -38,5 +38,10 @@ class ReportController extends Controller {
 			$pdf = PDF::loadView('channelreport', compact('indicators', 'thumbnail', 'published_at'));
 			return $pdf->download('ChannelMetrics.pdf');
 		}
+
+		return $request->user()->downloadInvoice($invoiceId, [
+			'vendor' => 'Your Company',
+			'product' => 'Your Product',
+		]);
 	}
 }

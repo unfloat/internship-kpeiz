@@ -16,18 +16,18 @@
                 <thead>
                     <tr>
                         <th>Channel Title</th>
-                        <th>Published At</th>
                         <th>SUBSCRIBERS</th>
                         <th>VIEWS</th>
+                        <th>Published At</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tfoot>
                 <tr>
                     <th>Channel Title</th>
-                    <th>Published At</th>
                     <th>SUBSCRIBERS</th>
                     <th>VIEWS</th>
+                    <th>Published At</th>
                     <th>Actions</th>
                 </tr>
                 </tfoot>
@@ -39,9 +39,9 @@
                     @foreach($channeldata as $channel)
                     <tr>
                         <th>{{$channel['title']}}</th>
-                        <th>{{$channel['published_at']}}</th>
                         <th>{{ isset($channel['metrics']['subscriberCount']) ? $channel['metrics']['subscriberCount'] : 'unknown' }}</th>
                         <th>{{ isset($channel['metrics']['viewCount']) ? $channel['metrics']['viewCount'] : 'unknown'}}</th>
+                        <th>{{$channel['published_at']}}</th>
                         <th><a href="{{ url('/channelmetrics/'.$channel['id']) }}" class="btn btn-xs btn-default">{{$channel['id'] == app('channel')->id ? 'Selected' : 'See metrics' }}</a></th>
                     </tr>
                     @endforeach

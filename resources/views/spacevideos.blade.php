@@ -49,7 +49,7 @@
                                 <th>{{isset($video['metrics']['commentCount']) ? $video['metrics']['commentCount'] : 0}}</th>
                                 <th>
                                     <!--  <button class="btn btn-success"><a href="{{ url('/videometrics')}}">Details</a></button> -->
-                                    <a href="{{ url('/videometrics/'.$video['id']) }}" class="btn btn-xs btn-default">See metrics</i></a>
+                                    <a href="{{ url('/spacevideometrics/'.$video['id']) }}" class="btn btn-xs btn-default">See metrics</i></a>
                                 </th>
                             </tr>
                             @endforeach

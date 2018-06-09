@@ -5,7 +5,11 @@
                 <div class="span6 pull-left">
                     <!-- <div class="panel-heading clearfix"> -->
                     <h4> Channel <strong> {{ app('channel')->title }}</strong></h4>
-                    <h4> Active Playlist <strong> {{ app('playlist')->title }}</strong></h4>
+                    <figure>
+                        <img src="{{ app('playlist')->data['thumbnail'] }}" class="img-fluid">
+                    </figure>
+
+                    <h4>Playlist <strong> {{ app('playlist')->title }}</strong></h4>
                 </div>
                 <div class="span6 text-right">
                 <!-- </div>
@@ -32,15 +36,12 @@
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu" role="menu">
                             @if (isset($savedPlaylists))
-
                             @foreach($savedPlaylists as $id => $title)
-
                             <li>
                                 {{ csrf_field() }}
                                 <a class="btn" href="{{ url('/videos/'.$id)}}">
                                     {{$title}}
                                 </a>
-
                                 <!--  <form action= "{{ url('/setplaylist')}}" class = "form-inline" method="POST" data-toggle="validator">
                                     {{ csrf_field() }}
                                     <button class="btn btn-primary">

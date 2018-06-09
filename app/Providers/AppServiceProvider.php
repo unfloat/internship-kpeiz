@@ -40,6 +40,7 @@ class AppServiceProvider extends ServiceProvider {
  * @return void
  */
 	public function register() {
+
 		$this->app->singleton('since', function ($app) {
 			if (!Session::has('since')) {
 				return Carbon::now()->subMonths(1);
@@ -86,17 +87,14 @@ class AppServiceProvider extends ServiceProvider {
 				['playlists']
 			)->toArray();
 
-			if ($data == []) {
+			/*if ($data == []) {
 				$data = app('channel')->load(
 					['uploads']
-				)->toArray();
+				)->toArray();*/
 
-				foreach ($data['playlists'] as $key => $playlistdata) {
+			/*	foreach ($data['playlists'] as $key => $playlistdata) {
 					$savedPlaylists[$playlistdata['id']] = $playlistdata['title'];
-				}
-				return $savedPlaylists;
-
-			}
+				}*/
 
 			foreach ($data['playlists'] as $key => $playlistdata) {
 				$savedPlaylists[$playlistdata['id']] = $playlistdata['title'];

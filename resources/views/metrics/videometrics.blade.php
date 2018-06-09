@@ -12,36 +12,20 @@
 	</div>
 	@endif
 	<div class="col-md-12">
-		<div class="col-md-6">
-			@if(isset($videos))
-			@foreach($videos as $id => $data)
-			<div class="panel panel-white">
-				<div class="panel-heading clearfix">
-					<h4 class="panel-title">{{$id}}</h4>
-				</div>
-				<div class="panel-body">
-					<img src="{{$data}}" class="img-fluid">
-				</div>
-			</div>
-			@endforeach
-			@endif
-		</div>
-		<div class="col-md-6">
-			<div style="display: inline-block;">
-				<div class="pull-left">
-					@if(isset($indicators))
-					<ul>
-						@foreach ($indicators[$id] as $label => $indicator)
-						<li>
+		@if(isset($indicators))
+		@foreach ($indicators as $label => $indicator)
+			<div class="col-md-3 col-md-6">
+				<div class="panel panel-white stats-widget">
+					<div class="panel-body">
+						<div class="pull-left">
 							<span class="stats-number">{{$indicator}}</span>
 							<p class="stats-info">{{ config('chartsLabels.'.$label)}}</p>
-						</li>
-						@endforeach
-					</ul>
-					@endif
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		@endforeach
+		@endif
 	</div>
 	@if(isset($finals))
 	@foreach($finals as $finalkey => $final )
