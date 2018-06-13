@@ -19,7 +19,7 @@
                         <li><a href="{{ url('/playlists')}}">Playlists</a></li>
                         <!-- <li><a href="{{ url('/videos')}}">Videos</a></li> -->
 
-                        <li><a href="{{ url('/spacevideos')}}">Videos</a></li>
+                        <li><a href="{{ url('/videos')}}">Videos</a></li>
                     </ul>
                 </li>
                 {{-- <li class="active-page"> --}}

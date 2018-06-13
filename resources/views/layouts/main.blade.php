@@ -26,7 +26,7 @@
     @yield('css')
     <!-- Styles -->
     <link href="{{asset('assets/plugins/switchery/switchery.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/plugins/nvd3/nv.d3.min.css" rel="stylesheet ')}}">
+    <link href="{{asset('assets/plugins/nvd3/nv.d3.min.css')}}"  rel="stylesheet">
     <!-- Theme Styles -->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -71,8 +71,6 @@
     <script src="{{asset('/js/pages/table-data.js')}}"></script>
     <script src="{{asset('/js/main.js')}}"></script>
     <script src="{{asset('assets/plugins/chartjs/chart.min.js')}}"></script>
-    <script src="{{asset('assets/js/space.min.js')}}"></script>
-    <script src="{{asset('assets/js/pages/dashboard.js')}}"></script>
     <script src="{{asset('assets/plugins/d3/d3.min.js')}}"></script>
     <script src="{{asset('assets/plugins/nvd3/nv.d3.min.js')}}"></script>
     <script src="{{asset('assets/plugins/flot/jquery.flot.min.js')}}"></script>
@@ -81,8 +79,14 @@
     <script src="{{asset('assets/plugins/flot/jquery.flot.resize.min.js')}}"></script>
     <script src="{{asset('assets/plugins/flot/jquery.flot.tooltip.min.js')}}"></script>
     <script src="{{asset('assets/plugins/flot/jquery.flot.pie.min.js')}}"></script>
-    {{-- <script src="{{asset('js/pages/chart.js')}}"></script> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script> --}}
+<!--     <script src="{{asset('js/pages/chart.js')}}"></script>
+ -->    <script src="{{asset('assets/plugins/d3/d3.js')}}"></script>
+    <script src="{{asset('assets/plugins/nvd3/nv.d3.js')}}"></script>
+
+
+
+
+
     @yield('js')
   </body>
 </html>

@@ -1,20 +1,19 @@
 <?php
 namespace App\Helpers;
 class SpaceChart {
-	public $id;
 	public $labels;
 	public $datasets;
 	public $type;
-	public function __construct($container_id, $type) {
-		$this->id = $container_id;
+
+	public function __construct($type) {
+
 		$this->type = $type;
 	}
-	public static function initChart($container_id, $type) {
-		return (new SpaceChart($container_id, $type));
+	public static function initChart($type) {
+		return (new SpaceChart($type));
 	}
-	public function addDataSets($data, $params = []) {
-		$params['data'] = $data;
-		$this->datasets[] = $params;
+	public function addDataSets() {
+
 		return $this;
 	}
 	public function setLabels($labels) {

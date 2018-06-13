@@ -1,10 +1,7 @@
 <script>
 
-// -- Bar Chart Example
-var groupStackedbar = {!! json_encode(($chart)) !!}
-// console.log(groupStackedbar);
-
-
+var bar = {!! json_encode(($spacechart)) !!}
+console.log(bar);
 /* Inspired by Lee Byron's test data generator. */
 function stream_layers(n, m, o) {
   if (arguments.length < 3) o = 0;
@@ -39,7 +36,7 @@ function stream_index(d, i) {
   return {x: i, y: Math.max(0, d)};
 };
     var nvddata3 = function() {
-        return stream_layers(3,10+Math.random()*100,.1).map(function(data, i) {
+        return stream_layers(3,11,.1).map(function(data, i) {
             return {
                 key: 'Stream' + i,
                 values: data

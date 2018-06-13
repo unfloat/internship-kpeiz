@@ -13,6 +13,7 @@ class ChannelController extends Controller {
 	public function __construct(CreateChart $charts, ChannelStats $channelStats) {
 		$this->charts = $charts;
 		$this->channelStats = $channelStats;
+
 	}
 
 	public function getMetrics($id = null) {
@@ -44,7 +45,7 @@ class ChannelController extends Controller {
 			$finals[$data['title']] = $this->charts->getChart($data['channel_metric'],
 				[
 					'bar' => ['subscriberCount'],
-					'pie' => ['viewCount', 'subscriberCount'],
+					'pie' => ['videoCount', 'commentCount'],
 					'line' => ['viewCount'],
 
 				]

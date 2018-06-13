@@ -35,11 +35,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/downloadPDF', 'ReportController@downloadPDF')->name('downloadPDF');
 	Route::get('/mail', 'ContactController@mail')->name('mail');
 
-	Route::get('/spacevideos/{id?}', 'testSpaceController@getVideos')->name('videos');
-	Route::get('/spacevideometrics/{id?}', 'testSpaceController@getMetrics')->name('videometrics');
-
-	// Route::get('/home', 'HomeController@test')->name('home');
-
 	// POST METHODS
 
 	Route::post('/setaccount', 'formController@setAccount')->name('setAccount');
@@ -49,7 +44,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/datepick', 'formController@updateDate')->name('datePick');
 	Route::post('/setvideo', 'formController@setVideo')->name('setVideo');
 
-	Route::post('/send', 'ContactController@send')->name('send');
+	Route::post('/sendmail', 'ContactController@sendmail')->name('sendmail');
 
-	// Route::post('/putPeriod', 'formController@putPeriod')->name('putPeriod');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\CreateChart;
+use App\Helpers\CreateSpaceChart;
 use App\Helpers\VideoStats;
 use Carbon\Carbon;
 use Session;
@@ -13,10 +14,12 @@ class VideoController extends Controller {
 	protected $charts;
 	protected $videoStats;
 	protected $activeVideo;
+	protected $spacecharts;
 
-	public function __construct(CreateChart $charts, VideoStats $videoStats) {
+	public function __construct(CreateChart $charts, VideoStats $videoStats, CreateSpaceChart $spacecharts) {
 		$this->charts = $charts;
 		$this->videoStats = $videoStats;
+		$this->spacecharts = $spacecharts;
 
 	}
 
@@ -85,6 +88,12 @@ class VideoController extends Controller {
 
 						]);
 
+					$spacefinals[] = $this->spacecharts->getChart($videodata['video_metrics'],
+						[
+							'line' => ['viewCount'],
+
+						]);
+
 					$indicators = $this->videoStats->getBasicIndicators($videodata['video_metrics']);
 				}
 
@@ -95,6 +104,18 @@ class VideoController extends Controller {
 			return redirect()->back();
 		}
 
-		return view('metrics.videometrics', compact('finals', 'indicators', 'savedVideos'));
+		return view('metrics.videometrics', compact('finals', 'indicators', 'savedVideos', 'spacefinals'));
+	}
+
+	public function downloadPDF(Request $request) {
+
+		//$currentView = $view->getName();
+		$name = Route::currentRouteName();
+
+		if ($request->has('download')) {
+			$pdf = PDF::loadView($name);
+			return $pdf->download($name . '.pdf');
+		}
+
 	}
 }

@@ -22,7 +22,7 @@ class Chart {
 
 	public function addDataSets($data) {
 		// /dd($data);
-		$params = []
+		$params = [];
 		$params = array_merge($this->getConfig($this->title), $params);
 		$params['data'] = $data;
 		//$params['data'] = $data;
@@ -69,14 +69,12 @@ class Chart {
 		if ('line' == $this->type) {
 			return [
 				'label' => $this->title,
-				'lineTension' => 0.3,
-				'borderColor' => "rgba(2,117,216,1)",
+				'lineTension' => 0.1,
+				'borderColor' => "rgb(99, 203, 137)",
 				'fill' => false,
 				'pointRadius' => 5,
-				'pointBackgroundColor' => "rgba(2,117,216,1)",
-				'pointBorderColor' => "rgba(255,255,255,0.8)",
 				'pointHoverRadius' => 5,
-				'pointHoverBackgroundColor' => "rgba(2,117,216,1)",
+				'pointHoverBackgroundColor' => "rgb(99, 203, 137)",
 				'pointHitRadius' => 20,
 				'pointBorderWidth' => 2,
 			];

@@ -2,7 +2,6 @@
 <script>
 
 var line = {!! json_encode($chart) !!}
-console.log(line)
 var ctx = document.getElementById(line.id);
 var myLineChart = new Chart(ctx, {
   type: line.type,

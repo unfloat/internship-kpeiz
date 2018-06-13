@@ -14,16 +14,16 @@
 	<div class="col-md-12">
 		@if(isset($indicators))
 		@foreach ($indicators as $label => $indicator)
-			<div class="col-md-3 col-md-6">
-				<div class="panel panel-white stats-widget">
-					<div class="panel-body">
-						<div class="pull-left">
-							<span class="stats-number">{{$indicator}}</span>
-							<p class="stats-info">{{ config('chartsLabels.'.$label)}}</p>
-						</div>
+		<div class="col-md-3 col-md-6">
+			<div class="panel panel-white stats-widget">
+				<div class="panel-body">
+					<div class="pull-left">
+						<span class="stats-number">{{$indicator}}</span>
+						<p class="stats-info">{{ config('chartsLabels.'.$label)}}</p>
 					</div>
 				</div>
 			</div>
+		</div>
 		@endforeach
 		@endif
 	</div>
@@ -32,7 +32,7 @@
 	<div class="col-md-12">
 		@foreach ($final as $key => $charts)
 		@foreach ($charts as $key => $chart)
-		<div class="{{ $chart->type == 'line' ? 'col-md-12' : 'col-md-6' }}">
+		<div class="col-md-6">
 			<div class="panel panel-white">
 				<div class="panel-body">
 					<div class="panel-heading clearfix">
@@ -47,6 +47,26 @@
 	</div>
 	@endforeach
 	@endif
+	<div class="col-md-6">
+		@if(isset($spacefinals))
+		@foreach($spacefinals as $finalkey => $final )
+		<div class="col-md-12">
+			@foreach ($final as $key => $charts)
+			@foreach ($charts as $key => $spacechart)
+			<div class="panel panel-white">
+				<div class="panel-body">
+					<div class="panel-heading clearfix">
+						<h4 class="panel-title"></h4>
+					</div>
+					<div id="nvd3"><svg></svg></div>
+				</div>
+			</div>
+			@endforeach
+			@endforeach
+		</div>
+		@endforeach
+		@endif
+	</div>
 </div>
 @endsection
 @section('js')
@@ -55,6 +75,15 @@
 @foreach ($final as $key => $charts)
 @foreach ($charts as $key => $chart)
 @include('charts.'.$chart->type,['chart' => $chart])
+@endforeach
+@endforeach
+@endforeach
+@endif
+@if(isset($spacefinals))
+@foreach($spacefinals as $key => $final )
+@foreach ($final as $key => $charts)
+@foreach ($charts as $key => $spacechart)
+@include('spacecharts.'.$spacechart->type,['chart' => $spacechart])
 @endforeach
 @endforeach
 @endforeach

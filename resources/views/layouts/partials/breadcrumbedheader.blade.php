@@ -13,6 +13,9 @@
                 <!-- </div>
                 <div class="panel-body"> -->
                     <a title="Choisir une chaine" data-toggle="modal" data-target="#savedChannelModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-youtube-play"><span class="span"> Channel Filter</span></i></button></a>
+                    <button class="btn btn-primary">
+                    <a href="{{ route('downloadPDF',['download'=>'pdf']) }}"><span class="span">Download PDF</span></a>
+                    </button>
                     <!-- </div> -->
                 </div>
             </div>

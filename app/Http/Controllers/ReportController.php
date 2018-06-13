@@ -4,6 +4,7 @@ use App\Helpers\ChannelStats;
 use App\Helpers\CreateChart;
 use Illuminate\Http\Request;
 use PDF;
+use Route;
 
 class ReportController extends Controller {
 	protected $charts;
@@ -12,36 +13,19 @@ class ReportController extends Controller {
 		$this->charts = $charts;
 		$this->channelStats = $channelStats;
 	}
-	public function getReport(Request $request, $invoiceId) {
+	public function getReport() {
 		$channel = app('channel');
 		return view('report', compact('channel'));
 	}
 	public function downloadPDF(Request $request) {
-		$since = app('since');
-		$until = app('until');
-		$data = app('channel')->load([
-			'channelMetric' => function ($query) use ($since, $until) {
-				$query->whereBetween('channel_metric.created_at', [$since, $until]);
-			},
-			'channelData' => function ($query) use ($since, $until) {
-				$query->whereBetween('channel_data.created_at', [$since, $until]);
-			},
-		]
-		)->toArray();
-		$indicators = $this->channelStats->getBasicIndicators($data['channel_metric']);
-		if (!isset($data)) {
-			return redirect()->back();
-		}
-		$thumbnail = $data['data']['thumbnail'];
-		$published_at = $data['published_at'];
+
+		//$currentView = $view->getName();
+		$name = Route::currentRouteName();
+
 		if ($request->has('download')) {
-			$pdf = PDF::loadView('channelreport', compact('indicators', 'thumbnail', 'published_at'));
-			return $pdf->download('ChannelMetrics.pdf');
+			$pdf = PDF::loadView($name);
+			return $pdf->download($name . '.pdf');
 		}
 
-		return $request->user()->downloadInvoice($invoiceId, [
-			'vendor' => 'Your Company',
-			'product' => 'Your Product',
-		]);
 	}
 }
