@@ -4,7 +4,6 @@ use App\Helpers\ChannelStats;
 use App\Helpers\CreateChart;
 use Illuminate\Http\Request;
 use PDF;
-use Route;
 
 class ReportController extends Controller {
 	protected $charts;
@@ -19,12 +18,9 @@ class ReportController extends Controller {
 	}
 	public function downloadPDF(Request $request) {
 
-		//$currentView = $view->getName();
-		$name = Route::currentRouteName();
-
 		if ($request->has('download')) {
-			$pdf = PDF::loadView($name);
-			return $pdf->download($name . '.pdf');
+			$pdf = PDF::loadView($activeView);
+			return $pdf->download('ChannelMetrics.pdf');
 		}
 
 	}

@@ -18,13 +18,13 @@ class ContactController extends Controller {
 
 		$contact['name'] = $request->get('name');
 		$contact['email'] = Auth::user()->email;
-		$contact['message'] = $request->get('message');
+		$contact['msg'] = $request->get('msg');
 
-		Mail::send('mailtemplate', ['message' => $contact['message'], function ($mail) use ($contact) {
+		Mail::send('mailtemplate', $contact, function ($mail) use ($contact) {
 			$mail->from($contact['email'], $contact['name']);
 			$mail->to('olphazarrouk@gmail.com')->subject('User Contact');
-		},
-		]);
+		}
+		);
 
 		Session::flash('msg', ['type' => 'success', 'text' => 'Your message has been sent!']);
 

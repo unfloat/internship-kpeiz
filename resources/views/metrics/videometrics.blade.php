@@ -4,6 +4,7 @@
 @endsection
 @section('content')
 <div class="row">
+
 	@include('layouts.partials.breadcrumbedvideoheader')
 	@if(Session::has('msg'))
 	<div class="alert alert-{{  Session::get('msg')['type'] }} alert-dismissible" role="alert" style="margin-bottom:0;">
@@ -11,6 +12,7 @@
 		{{  Session::get('msg')['text'] }}
 	</div>
 	@endif
+
 	<div class="col-md-12">
 		@if(isset($indicators))
 		@foreach ($indicators as $label => $indicator)
@@ -39,6 +41,7 @@
 						<h4 class="panel-title"> Chart :{{ config('chartsLabels.'.$chart->title) }}</h4>
 					</div>
 					<canvas id="{{ $chart->id }}" width="578" height="289"></canvas>
+
 				</div>
 			</div>
 		</div>
@@ -47,26 +50,13 @@
 	</div>
 	@endforeach
 	@endif
-	<div class="col-md-6">
-		@if(isset($spacefinals))
-		@foreach($spacefinals as $finalkey => $final )
-		<div class="col-md-12">
-			@foreach ($final as $key => $charts)
-			@foreach ($charts as $key => $spacechart)
-			<div class="panel panel-white">
-				<div class="panel-body">
-					<div class="panel-heading clearfix">
-						<h4 class="panel-title"></h4>
-					</div>
-					<div id="nvd3"><svg></svg></div>
-				</div>
-			</div>
-			@endforeach
-			@endforeach
-		</div>
-		@endforeach
-		@endif
-	</div>
+
+</div>
+<div class="col-md-12">
+	<button class="btn btn-primary">
+
+                    <a href="{{ route('downloadPDF',['download'=>'pdf']) }}">Download PDF</a>
+    </button>
 </div>
 @endsection
 @section('js')
@@ -79,13 +69,5 @@
 @endforeach
 @endforeach
 @endif
-@if(isset($spacefinals))
-@foreach($spacefinals as $key => $final )
-@foreach ($final as $key => $charts)
-@foreach ($charts as $key => $spacechart)
-@include('spacecharts.'.$spacechart->type,['chart' => $spacechart])
-@endforeach
-@endforeach
-@endforeach
-@endif
+
 @endsection

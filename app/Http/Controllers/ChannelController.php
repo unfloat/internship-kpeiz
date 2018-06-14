@@ -66,4 +66,12 @@ class ChannelController extends Controller {
 
 		return view('metrics.channelmetrics', compact('indicators', 'finals'));
 	}
+
+	public function downloadPDF($id = null) {
+
+		$pdf = PDF::loadView('videometrics/' . $id);
+		$pdf->download('videometrics.pdf');
+
+		return redirect()->back();
+	}
 }

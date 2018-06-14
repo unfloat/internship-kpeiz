@@ -6,6 +6,8 @@ use App\Helpers\CreateChart;
 use App\Helpers\CreateSpaceChart;
 use App\Helpers\VideoStats;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use PDF;
 use Session;
 
 class VideoController extends Controller {
@@ -88,12 +90,6 @@ class VideoController extends Controller {
 
 						]);
 
-					$spacefinals[] = $this->spacecharts->getChart($videodata['video_metrics'],
-						[
-							'line' => ['viewCount'],
-
-						]);
-
 					$indicators = $this->videoStats->getBasicIndicators($videodata['video_metrics']);
 				}
 
@@ -104,18 +100,21 @@ class VideoController extends Controller {
 			return redirect()->back();
 		}
 
-		return view('metrics.videometrics', compact('finals', 'indicators', 'savedVideos', 'spacefinals'));
+		return view('metrics.videometrics', compact('finals', 'indicators', 'savedVideos'));
 	}
 
 	public function downloadPDF(Request $request) {
-
-		//$currentView = $view->getName();
-		$name = Route::currentRouteName();
-
+		$id = app('video')->id;
+		$savedVideos = app('savedVideos');
 		if ($request->has('download')) {
-			$pdf = PDF::loadView($name);
-			return $pdf->download($name . '.pdf');
+			$pdf = PDF::loadView('metrics.videometrics', get_defined_vars());
+			$pdf->setOption('enable-javascript', true);
+			$pdf->setOption('javascript-delay', 500);
+			$pdf->setOption('enable-smart-shrinking', true);
+			$pdf->setOption('no-stop-slow-scripts', true);
 		}
-
+		return $pdf->download('videometrics.pdf');
+/*		return $pdf->download('videometrics.pdf');
+ */
 	}
 }
