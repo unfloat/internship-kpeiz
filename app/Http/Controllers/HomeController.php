@@ -14,7 +14,7 @@ class HomeController extends Controller {
 	}
 	public function getURL(Request $request) {
 		try {
-			$channeldata = Auth::user()->channels()->take(10)->get()->toArray();
+			$channeldata = Auth::user()->channels()->get()->toArray();
 		} catch (\Exception $e) {
 			Session::flash('msg', ['type' => 'danger', 'text' => 'No collected Data ']);
 		}

@@ -48,8 +48,7 @@
                                 <th>{{isset($video['metrics']['likeCount']) ? $video['metrics']['likeCount'] : 0}}</th>
                                 <th>{{isset($video['metrics']['commentCount']) ? $video['metrics']['commentCount'] : 0}}</th>
                                 <th>
-                                    <!--  <button class="btn btn-success"><a href="{{ url('/videometrics')}}">Details</a></button> -->
-                                    <a href="{{ url('/videometrics/'.$video['id']) }}" class="btn btn-xs btn-default">See metrics</i></a>
+                                    <a href="{{ url('/videometrics/'.$video['id']) }}" class="btn btn-xs btn-default">See metrics</a>
                                 </th>
                             </tr>
                             @endforeach
@@ -61,5 +60,4 @@
         </div>
     </div>
 </div>
-
         @endsection

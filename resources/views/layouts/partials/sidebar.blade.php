@@ -22,12 +22,11 @@
                         <li><a href="{{ url('/videos')}}">Videos</a></li>
                     </ul>
                 </li>
-                {{-- <li class="active-page"> --}}
-                    <li>
+                    <!-- <li>
                         <a href="{{ url('/channelreports')}}">
                             <i class="menu-icon fa fa-file-text-o"></i><span>Rapports</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="menu-divider"></li>
                     <li>
                         <a href="{{ url('/mail')}}">

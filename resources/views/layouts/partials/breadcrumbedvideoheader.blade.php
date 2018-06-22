@@ -11,6 +11,10 @@
                 </div>
                 <div class="span6 text-right">
                     <a title="Choisir un Video" data-toggle="modal" data-target="#videoModal" class="left-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-file-video-o"><span class="span"> Video Filter </span></i></button></a>
+                        <button class="btn btn-primary">
+                        <a href="{{ route('downloadPDFVideo',['download'=>'pdf']) }}">Download PDF</a>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

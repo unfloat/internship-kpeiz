@@ -22,10 +22,11 @@ class ChannelController extends Controller {
 
 		$since = app('since');
 		$until = app('until');
+
+		Session::put('channel_id', $id);
+		Session::save();
 		try {
 			if (isset($id)) {
-				Session::put('channel_id', $id);
-				Session::save();
 
 				$data = app('channel')->load([
 					'channelMetric' => function ($query) use ($since, $until) {
@@ -45,7 +46,7 @@ class ChannelController extends Controller {
 			$finals[$data['title']] = $this->charts->getChart($data['channel_metric'],
 				[
 					'bar' => ['subscriberCount'],
-					'pie' => ['videoCount', 'commentCount'],
+					'pie' => ['subscriberCount', 'viewCount', 'videoCount'],
 					'line' => ['viewCount'],
 
 				]

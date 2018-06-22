@@ -24,7 +24,7 @@ class YoutubeChannelDAO {
 	public static function saveChannel($data, $user_id) {
 
 		if (count($data->items) == 0) {
-			dd('no items');
+			Session::flash('msg', ['type' => 'danger', 'text' => 'Pas de données']);
 		}
 
 		$channelArray = self::convertToChannel(head($data->items), $user_id);

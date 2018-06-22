@@ -3,6 +3,8 @@
 @endsection
 @section('content')
 @include('layouts.partials.breadcrumbedheader')
+
+
 <div class="row">
   @if(Session::has('msg'))
   <div class="alert alert-{{  Session::get('msg')['type'] }} alert-dismissible" role="alert" style="margin-bottom:0;">

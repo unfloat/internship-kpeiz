@@ -23,11 +23,6 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <!--  <ul class="nav navbar-nav">
-                    <li><a href="javascript:void(0)" id="collapsed-sidebar-toggle-button" ><i class="fa fa-bars"></i></a></li>
-                    <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
-                    <li><a href="javascript:void(0)" id="search-button"><i class="fa fa-search"></i></a></li>
-                </ul> -->
                 <ul class="nav navbar-nav navbar-right">
                     <a title="Choisir un intervalle" data-toggle="modal" data-target="#dateModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-calendar"><span class="span"> Period Filter</span></i></button></a>
                     <a title="Choisir une Chaine" data-toggle="modal" data-target="#channelModal" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><button type="button" class="btn btn-default"><i class="fa fa-youtube-play"><span class="span"> Channel</span></i></button></a>
@@ -66,8 +61,8 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action= "{{ url('/channel')}}" class = "form-inline" method="post" data-toggle="validator">
+                <form action= "{{ url('/channel')}}" class = "form-inline" method="post" data-toggle="validator">
+                    <div class="modal-body">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-sm-6">
@@ -78,11 +73,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Choisir</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">Choisir</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

@@ -32,7 +32,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/videometrics/{id?}', 'VideoController@getMetrics')->name('videometrics');
 	Route::get('/playlistmetrics/{id}', 'PlaylistController@getMetrics')->name('playlistmetrics');
 	Route::get('/channelreports', 'ReportController@getReport')->name('channelreports');
-	Route::get('/downloadPDF', 'VideoController@downloadPDF')->name('downloadPDF');
+	Route::get('/downloadPDF', 'ReportController@downloadPDF')->name('downloadPDF');
+	Route::get('/downloadPDFVideo', 'ReportController@downloadPDFVideo')->name('downloadPDFVideo');
+
 	Route::get('/mail', 'ContactController@mail')->name('mail');
 
 	// POST METHODS

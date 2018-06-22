@@ -52,12 +52,7 @@
 	@endif
 
 </div>
-<div class="col-md-12">
-	<button class="btn btn-primary">
 
-                    <a href="{{ route('downloadPDF',['download'=>'pdf']) }}">Download PDF</a>
-    </button>
-</div>
 @endsection
 @section('js')
 @if(isset($finals))
